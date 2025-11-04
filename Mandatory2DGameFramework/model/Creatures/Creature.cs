@@ -16,8 +16,8 @@ public class Creature
 
 
     // Todo consider how many attack / defence weapons are allowed
-    public AttackItem?   Attack { get; set; }
-    public DefenceItem?  Defence { get; set; }
+    public AttackItem? Attack { get; set; }
+    public DefenceItem? Defence { get; set; }
 
     public Creature()
     {
@@ -26,7 +26,6 @@ public class Creature
 
         Attack = null;
         Defence = null;
-
     }
 
     public int Hit()
