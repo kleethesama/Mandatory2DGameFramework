@@ -5,21 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mandatory2DGameFramework.model.defence
+namespace Mandatory2DGameFramework.model.defence;
+
+public class DefenceItem:WorldObject
 {
-    public class DefenceItem:WorldObject
+    public int ReduceHitPoint { get; set; }
+
+    public DefenceItem()
     {
-        public int ReduceHitPoint { get; set; }
+        Name = string.Empty;
+        ReduceHitPoint = 0;
+    }
 
-        public DefenceItem()
-        {
-            Name = string.Empty;
-            ReduceHitPoint = 0;
-        }
-
-        public override string ToString()
-        {
-            return $"{{{nameof(Name)}={Name}, {nameof(ReduceHitPoint)}={ReduceHitPoint.ToString()}}}";
-        }
+    public override string ToString()
+    {
+        return $"{{{nameof(Name)}={Name}, {nameof(ReduceHitPoint)}={ReduceHitPoint.ToString()}}}";
     }
 }
