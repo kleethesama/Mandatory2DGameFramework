@@ -44,12 +44,8 @@ public class Creature
         throw new NotImplementedException();
     }
 
-
-
-
-
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(HitPoint)}={HitPoint.ToString()}, {nameof(Attack)}={Attack}, {nameof(Defence)}={Defence}}}";
+        return $"{{{nameof(Name)}={Name}, {nameof(HitPoint)}={HitPoint}, {nameof(Attack)}={Attack}, {nameof(Defence)}={Defence}}}";
     }
 }

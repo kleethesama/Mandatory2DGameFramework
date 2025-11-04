@@ -21,6 +21,6 @@ public class WorldObject
 
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(Lootable)}={Lootable.ToString()}, {nameof(Removeable)}={Removeable.ToString()}}}";
+        return $"{{{nameof(Name)}={Name}, {nameof(Lootable)}={Lootable}, {nameof(Removeable)}={Removeable}}}";
     }
 }

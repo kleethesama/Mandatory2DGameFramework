@@ -12,7 +12,6 @@ public class World
     public int MaxX { get; set; }
     public int MaxY { get; set; }
 
-
     // world objects
     private List<WorldObject> _worldObjects;
     // world creatures
@@ -22,12 +21,12 @@ public class World
     {
         MaxX = maxX;
         MaxY = maxY;
-        _worldObjects = new List<WorldObject>();
-        _creatures = new List<Creature>();
+        _worldObjects = [];
+        _creatures = [];
     }
 
     public override string ToString()
     {
-        return $"{{{nameof(MaxX)}={MaxX.ToString()}, {nameof(MaxY)}={MaxY.ToString()}}}";
+        return $"{{{nameof(MaxX)}={MaxX}, {nameof(MaxY)}={MaxY}}}";
     }
 }

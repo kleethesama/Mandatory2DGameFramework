@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mandatory2DGameFramework.model.defence;
 
-public class DefenceItem:WorldObject
+public class DefenceItem : WorldObject
 {
     public int ReduceHitPoint { get; set; }
 
@@ -19,6 +19,6 @@ public class DefenceItem:WorldObject
 
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(ReduceHitPoint)}={ReduceHitPoint.ToString()}}}";
+        return $"{{{nameof(Name)} = {Name}, {nameof(ReduceHitPoint)} = {ReduceHitPoint}}}";
     }
 }

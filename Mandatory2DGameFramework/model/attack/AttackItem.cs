@@ -9,7 +9,6 @@ namespace Mandatory2DGameFramework.model.attack;
 
 public class AttackItem : WorldObject
 {
-    public string Name { get; set; }
     public int Hit { get; set; }
     public int Range { get; set; }
 
@@ -22,6 +21,6 @@ public class AttackItem : WorldObject
 
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(Hit)}={Hit.ToString()}, {nameof(Range)}={Range.ToString()}}}";
+        return $"{{{nameof(Name)}={Name}, {nameof(Hit)}={Hit}, {nameof(Range)}={Range}}}";
     }
 }
