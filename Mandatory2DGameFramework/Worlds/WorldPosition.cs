@@ -17,6 +17,30 @@ public readonly struct WorldPosition
         Y = y;
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is WorldPosition other)
+        {
+            return X == other.X && Y == other.Y;
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(X, Y);
+    }
+
+    public static bool operator ==(WorldPosition left, WorldPosition right)
+    {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(WorldPosition left, WorldPosition right)
+    {
+        return !left.Equals(right);
+    }
+
     public static WorldPosition operator +(WorldPosition left, WorldPosition right)
     {
         return new WorldPosition(left.X + right.X, left.Y + right.Y);
