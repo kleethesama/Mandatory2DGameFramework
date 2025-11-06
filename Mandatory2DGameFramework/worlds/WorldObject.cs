@@ -5,20 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mandatory2DGameFramework.worlds;
+namespace Mandatory2DGameFramework.Worlds;
 
-public class WorldObject
+public class WorldObject : WorldEntityBase
 {
-    public WorldPosition Position { get; set; }
-    public string Name { get; set; }
     public bool Lootable { get; set; }
     public bool Removeable { get; set; }
 
     public WorldObject()
     {
-        Name = string.Empty;
         Lootable = false;
         Removeable = false;
+    }
+
+    public WorldObject(string name, bool lootable, bool removeable)
+    {
+        Name = name;
+        Lootable = lootable;
+        Removeable = removeable;
     }
 
     public override string ToString()
