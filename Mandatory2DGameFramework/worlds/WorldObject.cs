@@ -1,18 +1,11 @@
-﻿using Mandatory2DGameFramework.Worlds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Mandatory2DGameFramework.Worlds;
+﻿namespace Mandatory2DGameFramework.Worlds;
 
 public class WorldObject : WorldEntityBase
 {
     public bool Lootable { get; set; }
     public bool Removeable { get; set; }
 
-    public WorldObject()
+    public WorldObject() : base()
     {
         Lootable = false;
         Removeable = false;

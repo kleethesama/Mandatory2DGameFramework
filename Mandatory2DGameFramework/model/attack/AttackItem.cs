@@ -12,9 +12,8 @@ public class AttackItem : WorldObject
     public int Hit { get; set; }
     public int Range { get; set; }
 
-    public AttackItem()
+    public AttackItem() : base()
     {
-        Name = string.Empty;
         Hit = 0;
         Range = 0;
     }
