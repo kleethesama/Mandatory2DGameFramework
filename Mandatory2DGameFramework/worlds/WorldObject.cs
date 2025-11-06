@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mandatory2DGameFramework.Worlds;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Mandatory2DGameFramework.worlds;
 
 public class WorldObject
 {
+    public WorldPosition Position { get; set; }
     public string Name { get; set; }
     public bool Lootable { get; set; }
     public bool Removeable { get; set; }

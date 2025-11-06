@@ -1,6 +1,7 @@
 ﻿using Mandatory2DGameFramework.model.attack;
 using Mandatory2DGameFramework.model.defence;
 using Mandatory2DGameFramework.worlds;
+using Mandatory2DGameFramework.Worlds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Mandatory2DGameFramework.model.Creatures;
 
 public class Creature
 {
+    public WorldPosition Position { get; set; }
     public string Name { get; set; }
     public int HitPoint { get; set; }
 
