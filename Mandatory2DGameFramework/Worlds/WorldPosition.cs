@@ -17,6 +17,16 @@ public readonly struct WorldPosition
         Y = y;
     }
 
+    public static WorldPosition operator +(WorldPosition left, WorldPosition right)
+    {
+        return new WorldPosition(left.X + right.X, left.Y + right.Y);
+    }
+
+    public static WorldPosition operator -(WorldPosition left, WorldPosition right)
+    {
+        return new WorldPosition(left.X - right.X, left.Y - right.Y);
+    }
+
     public override string ToString()
     {
         return $"{{{nameof(X)} = {X}, {nameof(Y)} = {Y}}}";
