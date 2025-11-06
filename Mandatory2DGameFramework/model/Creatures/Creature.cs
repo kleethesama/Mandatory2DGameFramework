@@ -4,67 +4,47 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public abstract class Creature : WorldEntityBase
+public abstract class Creature(string name, WorldPosition position) : WorldEntityBase(name, position)
 {
-    public int HitPoint { get; set; }
+    public abstract int HitPoint { get; set; }
+    public abstract int MoveRange { get; set; }
+    public abstract List<AttackItem> Attack { get; set; }
+    public abstract List<DefenceItem> Defence { get; set; }
 
-    //public abstract List<AttackItem> Attack { get; set; }
-    //public abstract List<DefenceItem> Defence { get; set; }
-    public AttackItem? Attack { get; set; }
-    public DefenceItem? Defence { get; set; }
+    public abstract void Move(WorldPosition directionVector);
 
-
-    public Creature() : base()
+    private void MoveTo(WorldPosition newPosition)
     {
-        HitPoint = 100;
-        Attack = null;
-        Defence = null;
-    }
-
-    public Creature(string name, int hitPoint) : base(name)
-    {
-        HitPoint = hitPoint;
-        Attack = null;
-        Defence = null;
-    }
-
-    public Creature(string name, int hitPoint, AttackItem attackItem, DefenceItem defenceItem) : base(name)
-    {
-        HitPoint = hitPoint;
-        Attack = attackItem;
-        Defence = defenceItem;
-    }
-
-    public Creature(string name, WorldPosition position, int hitPoint) : base(name, position)
-    {
-        HitPoint = hitPoint;
-        Attack = null;
-        Defence = null;
-    }
-
-    public Creature(string name, WorldPosition position, int hitPoint, AttackItem attackItem, DefenceItem defenceItem) : base(name, position)
-    {
-        HitPoint = hitPoint;
-        Attack = attackItem;
-        Defence = defenceItem;
+        Position = newPosition;
     }
 
     public int Hit(Creature creature)
     {
-        if (Attack == null) { return 0; }
-        var hit = Attack.Hit;
-        creature.ReceiveHit(hit);
-        return hit;
+        if (Attack.Count == 0) { return 0; }
+        int totalDamage = 0;
+        foreach (var attackItem in Attack)
+        {
+            creature.ReceiveHit(attackItem.Hit);
+            totalDamage += attackItem.Hit;
+        }
+        return totalDamage;
     }
 
     public void ReceiveHit(int hit)
     {
-        if (Defence == null)
+        if (Defence.Count == 0)
         {
             HitPoint -= hit;
             return;
         }
-        HitPoint -= hit - Defence.ReduceHitPoint;
+        int totalDefence = 0;
+        foreach (var defenceItem in Defence)
+        {
+            totalDefence += defenceItem.ReduceHitPoint;
+        }
+        int totalDamage = hit - totalDefence;
+        if (totalDamage <= 0) { return; }
+        HitPoint -= totalDamage;
     }
 
     public void Loot(WorldObject obj)
