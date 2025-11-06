@@ -4,13 +4,15 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public class Creature : WorldEntityBase
+public abstract class Creature : WorldEntityBase
 {
     public int HitPoint { get; set; }
 
-    // Todo consider how many attack / defence weapons are allowed
+    //public abstract List<AttackItem> Attack { get; set; }
+    //public abstract List<DefenceItem> Defence { get; set; }
     public AttackItem? Attack { get; set; }
     public DefenceItem? Defence { get; set; }
+
 
     public Creature() : base()
     {
@@ -47,19 +49,32 @@ public class Creature : WorldEntityBase
         Defence = defenceItem;
     }
 
-    public int Hit()
+    public int Hit(Creature creature)
     {
-        throw new NotImplementedException();
+        if (Attack == null) { return 0; }
+        var hit = Attack.Hit;
+        creature.ReceiveHit(hit);
+        return hit;
     }
 
     public void ReceiveHit(int hit)
     {
-        throw new NotImplementedException();
+        if (Defence == null)
+        {
+            HitPoint -= hit;
+            return;
+        }
+        HitPoint -= hit - Defence.ReduceHitPoint;
     }
 
     public void Loot(WorldObject obj)
     {
         throw new NotImplementedException();
+    }
+
+    public bool IsDead()
+    {
+        return HitPoint <= 0;
     }
 
     public override string ToString()
