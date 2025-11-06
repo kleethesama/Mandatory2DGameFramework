@@ -19,6 +19,34 @@ public class Creature : WorldEntityBase
         Defence = null;
     }
 
+    public Creature(string name, int hitPoint) : base(name)
+    {
+        HitPoint = hitPoint;
+        Attack = null;
+        Defence = null;
+    }
+
+    public Creature(string name, int hitPoint, AttackItem attackItem, DefenceItem defenceItem) : base(name)
+    {
+        HitPoint = hitPoint;
+        Attack = attackItem;
+        Defence = defenceItem;
+    }
+
+    public Creature(string name, WorldPosition position, int hitPoint) : base(name, position)
+    {
+        HitPoint = hitPoint;
+        Attack = null;
+        Defence = null;
+    }
+
+    public Creature(string name, WorldPosition position, int hitPoint, AttackItem attackItem, DefenceItem defenceItem) : base(name, position)
+    {
+        HitPoint = hitPoint;
+        Attack = attackItem;
+        Defence = defenceItem;
+    }
+
     public int Hit()
     {
         throw new NotImplementedException();
@@ -36,6 +64,9 @@ public class Creature : WorldEntityBase
 
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(HitPoint)}={HitPoint}, {nameof(Attack)}={Attack}, {nameof(Defence)}={Defence}}}";
+        return base.ToString() +
+            $", {nameof(HitPoint)} = {HitPoint}, " +
+            $"{nameof(Attack)} = {Attack}, " +
+            $"{nameof(Defence)} = {Defence}}}";
     }
 }

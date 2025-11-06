@@ -7,19 +7,24 @@ public class WorldObject : WorldEntityBase
 
     public WorldObject() : base()
     {
-        Lootable = false;
-        Removeable = false;
     }
 
-    public WorldObject(string name, bool lootable, bool removeable)
+    public WorldObject(string name, bool lootable, bool removeable) : base(name)
     {
-        Name = name;
+        Lootable = lootable;
+        Removeable = removeable;
+    }
+
+    public WorldObject(string name, WorldPosition position, bool lootable, bool removeable) : base(name, position)
+    {
         Lootable = lootable;
         Removeable = removeable;
     }
 
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(Lootable)}={Lootable}, {nameof(Removeable)}={Removeable}}}";
+        return base.ToString() +
+            $", {nameof(Lootable)} = {Lootable}, " +
+            $"{nameof(Removeable)} = {Removeable}}}";
     }
 }
