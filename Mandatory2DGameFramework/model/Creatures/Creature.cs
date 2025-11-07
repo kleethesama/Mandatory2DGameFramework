@@ -6,39 +6,62 @@ namespace Mandatory2DGameFramework.Model.Creatures;
 
 public abstract class Creature(string name, WorldPosition position) : WorldEntityBase(name, position)
 {
+    private static readonly World s_world;
+
     public abstract int HitPoint { get; set; }
     public abstract int MoveRange { get; set; }
-    public abstract List<AttackItem> Attack { get; set; }
-    public abstract List<DefenceItem> Defence { get; set; }
+    public abstract List<AttackItem> AttackItems { get; set; }
+    public abstract List<DefenceItem> DefenceItems { get; set; }
 
-    public abstract void Move(WorldPosition directionVector);
+    private static int GetMoveDistance(WorldPosition directionVector)
+    {
+        double distance = Math.Sqrt(Math.Pow(directionVector.X, 2) + Math.Pow(directionVector.Y, 2));
+        return (int)Math.Floor(distance);
+    }
+
+    public void Move(WorldPosition directionVector)
+    {
+        if (MoveRange == 0) { return; }
+        int moveDistance = GetMoveDistance(directionVector);
+        if (moveDistance > MoveRange)
+        {
+            throw new ArgumentException(
+                "Movement vector must be less- or equal to the creature's movement range.",
+                nameof(directionVector));
+        }
+        MoveTo(directionVector);
+    }
 
     private void MoveTo(WorldPosition newPosition)
     {
+        if (newPosition.X > s_world.MaxX || newPosition.Y > s_world.MaxY)
+        {
+            throw new ArgumentException("New position exceeds world boundaries.", nameof(newPosition));
+        }
         Position = newPosition;
     }
 
     public int Hit(Creature creature)
     {
-        if (Attack.Count == 0) { return 0; }
+        if (AttackItems.Count == 0) { return 0; }
         int totalDamage = 0;
-        foreach (var attackItem in Attack)
+        foreach (var attackItem in AttackItems)
         {
-            creature.ReceiveHit(attackItem.Hit);
-            totalDamage += attackItem.Hit;
+            creature.ReceiveHit(attackItem.HitDamage);
+            totalDamage += attackItem.HitDamage;
         }
         return totalDamage;
     }
 
     public void ReceiveHit(int hit)
     {
-        if (Defence.Count == 0)
+        if (DefenceItems.Count == 0)
         {
             HitPoint -= hit;
             return;
         }
         int totalDefence = 0;
-        foreach (var defenceItem in Defence)
+        foreach (var defenceItem in DefenceItems)
         {
             totalDefence += defenceItem.ReduceHitPoint;
         }
@@ -61,7 +84,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     {
         return base.ToString() +
             $", {nameof(HitPoint)} = {HitPoint}, " +
-            $"{nameof(Attack)} = {Attack}, " +
-            $"{nameof(Defence)} = {Defence}}}";
+            $"{nameof(AttackItems)} = {AttackItems}, " +
+            $"{nameof(DefenceItems)} = {DefenceItems}}}";
     }
 }

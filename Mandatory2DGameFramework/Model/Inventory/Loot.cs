@@ -8,24 +8,26 @@ public abstract class Loot
 
     public int Id { get; private set; }
     public string Name { get; private set; }
-    public LootTypes.Type Type { get; private set; }
 
-    public Loot(int id, string name, LootTypes.Type type)
+    public Loot(int id, string name)
     {
         Id = id;
         Name = name;
-        Type = type;
     }
 
-    public Loot(WorldObject worldObject, int id, string name, LootTypes.Type type)
+    public Loot(WorldObject worldObject, int id, string name)
     {
-        if (!worldObject.Lootable)
-        {
-            throw new ArgumentException("A loot's world object must be lootable.", nameof(worldObject));
-        }
+        //if (!worldObject.Lootable)
+        //{
+        //    throw new ArgumentException("A loot's world object must be lootable.", nameof(worldObject));
+        //}
         _worldObject = worldObject;
         Id = id;
         Name = name;
-        Type = type;
+    }
+
+    public override string ToString()
+    {
+        return $"{{{nameof(Id)} = {Id}, {nameof(Name)} = {Name}}}";
     }
 }

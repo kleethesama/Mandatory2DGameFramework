@@ -1,25 +1,27 @@
-﻿using Mandatory2DGameFramework.Worlds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Mandatory2DGameFramework.Model.Inventory;
+using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Attack;
 
-public class AttackItem : WorldObject
+public class AttackItem : Loot
 {
-    public int Hit { get; set; }
+    public int HitDamage { get; set; }
     public int Range { get; set; }
 
-    public AttackItem() : base()
+    public AttackItem(int hitDamage, int range, int id, string name) : base(id, name)
     {
-        Hit = 0;
-        Range = 0;
+        HitDamage = hitDamage;
+        Range = range;
+    }
+
+    public AttackItem(int hitDamage, int range, WorldObject worldObject, int id, string name) : base(worldObject, id, name)
+    {
+        HitDamage = hitDamage;
+        Range = range;
     }
 
     public override string ToString()
     {
-        return $"{{{nameof(Name)}={Name}, {nameof(Hit)}={Hit}, {nameof(Range)}={Range}}}";
+        return $"{{{nameof(Name)}={Name}, {nameof(HitDamage)}={HitDamage}, {nameof(Range)}={Range}}}";
     }
 }

@@ -15,6 +15,7 @@ public class Inventory
 
     public Inventory(ILootGenerator lootGenerator)
     {
+        _loot = [];
         _lootGenerator = lootGenerator;
     }
 

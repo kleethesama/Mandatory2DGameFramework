@@ -2,5 +2,5 @@
 
 public interface ILootGenerator
 {
-    public List<Loot> GenerateLoot(LootTypes.Type type);
+    public List<Loot> GenerateLoot();
 }
