@@ -1,4 +1,5 @@
 ﻿using Mandatory2DGameFramework.Model.Attack;
+using Mandatory2DGameFramework.Model.CreatureBehavior;
 using Mandatory2DGameFramework.Model.Defence;
 using Mandatory2DGameFramework.Worlds;
 
@@ -12,6 +13,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     public abstract int MoveRange { get; set; }
     public abstract List<AttackItem> AttackItems { get; set; }
     public abstract List<DefenceItem> DefenceItems { get; set; }
+    protected abstract IBehavior? Behavior { get; set; }
 
     private static int GetMoveDistance(WorldPosition directionVector)
     {
@@ -78,6 +80,13 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     public bool IsDead()
     {
         return HitPoint <= 0;
+    }
+
+    public virtual void DoBehavior()
+    {
+        if (Behavior == null) { return; } // Don't do anything if is player.
+        Behavior.PlayerReaction();
+        Behavior.NpcReaction();
     }
 
     public override string ToString()
