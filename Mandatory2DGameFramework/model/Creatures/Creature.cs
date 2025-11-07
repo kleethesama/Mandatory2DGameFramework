@@ -1,5 +1,4 @@
 ﻿using Mandatory2DGameFramework.Model.Attack;
-using Mandatory2DGameFramework.Model.CreatureBehavior;
 using Mandatory2DGameFramework.Model.Defence;
 using Mandatory2DGameFramework.Worlds;
 
@@ -11,11 +10,11 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
 
     public abstract int HitPoint { get; set; }
     public abstract int MoveRange { get; set; }
+    public abstract int DetectRange { get; set; }
     public abstract List<AttackItem> AttackItems { get; set; }
     public abstract List<DefenceItem> DefenceItems { get; set; }
-    protected abstract IBehavior? Behavior { get; set; }
 
-    private static int GetMoveDistance(WorldPosition directionVector)
+    private static int CalculateMoveDistance(WorldPosition directionVector)
     {
         double distance = Math.Sqrt(Math.Pow(directionVector.X, 2) + Math.Pow(directionVector.Y, 2));
         return (int)Math.Floor(distance);
@@ -24,14 +23,14 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     public void Move(WorldPosition directionVector)
     {
         if (MoveRange == 0) { return; }
-        int moveDistance = GetMoveDistance(directionVector);
+        int moveDistance = CalculateMoveDistance(directionVector);
         if (moveDistance > MoveRange)
         {
             throw new ArgumentException(
                 "Movement vector must be less- or equal to the creature's movement range.",
                 nameof(directionVector));
         }
-        MoveTo(directionVector);
+        MoveTo(Position + directionVector);
     }
 
     private void MoveTo(WorldPosition newPosition)
@@ -80,13 +79,6 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     public bool IsDead()
     {
         return HitPoint <= 0;
-    }
-
-    public virtual void DoBehavior()
-    {
-        if (Behavior == null) { return; } // Don't do anything if is player.
-        Behavior.PlayerReaction();
-        Behavior.NpcReaction();
     }
 
     public override string ToString()
