@@ -4,9 +4,10 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public abstract class Creature(string name, WorldPosition position) : WorldEntityBase(name, position)
+public abstract class Creature(string name, WorldPosition position) : WorldEntityBase(name, position), IHitSubject
 {
     private static readonly World s_world;
+    private readonly List<IHitObserver> _observers = [];
 
     public abstract int HitPoint { get; set; }
     public abstract int MoveRange { get; set; }
@@ -59,6 +60,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
         if (DefenceItems.Count == 0)
         {
             HitPoint -= hit;
+            NotfiyHit();
             return;
         }
         int totalDefence = 0;
@@ -67,8 +69,13 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
             totalDefence += defenceItem.ReduceHitPoint;
         }
         int totalDamage = hit - totalDefence;
-        if (totalDamage <= 0) { return; }
+        if (totalDamage <= 0)
+        {
+            NotfiyHit();
+            return;
+        }
         HitPoint -= totalDamage;
+        NotfiyHit();
     }
 
     public void Loot(WorldObject obj)
@@ -87,5 +94,23 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
             $", {nameof(HitPoint)} = {HitPoint}, " +
             $"{nameof(AttackItems)} = {AttackItems}, " +
             $"{nameof(DefenceItems)} = {DefenceItems}}}";
+    }
+
+    public void Attach(IHitObserver observer)
+    {
+        _observers.Add(observer);
+    }
+
+    public bool Detach(IHitObserver observer)
+    {
+        return _observers.Remove(observer);
+    }
+
+    public void NotfiyHit()
+    {
+        foreach (var observer in _observers)
+        {
+            observer.Update(this);
+        }
     }
 }
