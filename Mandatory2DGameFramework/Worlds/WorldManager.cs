@@ -8,26 +8,13 @@ public sealed class WorldManager
 
     private WorldManager() { }
 
-    public static WorldManager GetInstance(World world)
+    public static WorldManager GetInstance(World? world = null)
     {
-        if (!Instance.IsValueCreated)
+        if (!Instance.IsValueCreated && world != null)
         {
-            var manager = Instance.Value;
-            manager.World = world;
+            var worldManager = Instance.Value;
+            worldManager.World = world;
         }
         return Instance.Value;
     }
-
-    //public static bool TryCreateInstance(World world, out WorldManager? worldManager)
-    //{
-    //    if (!Instance.IsValueCreated)
-    //    {
-    //        Instance = new Lazy<WorldManager>(() => new WorldManager());
-    //        Instance.Value.World = world;
-    //        worldManager = Instance.Value;
-    //        return true;
-    //    }
-    //    worldManager = null;
-    //    return false;
-    //}
 }

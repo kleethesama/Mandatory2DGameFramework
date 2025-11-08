@@ -4,7 +4,6 @@ namespace Mandatory2DGameFramework.Worlds;
 
 public class World
 {
-    private static WorldManager _worldInstance;
     private readonly List<WorldObject> _worldObjects;
     private readonly List<Creature> _creatures;
 
