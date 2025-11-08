@@ -4,7 +4,7 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public class Bird(string name, WorldPosition position) : AiCreature(name, position)
+public class Bird(string name, WorldPosition position, World world) : AiCreature(name, position, world)
 {
     public override int HitPoint { get; set; } = 10;
     public override int MoveRange { get; set; } = 5;

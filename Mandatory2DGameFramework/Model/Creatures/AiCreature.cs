@@ -3,7 +3,7 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public abstract class AiCreature(string name, WorldPosition position) : Creature(name, position)
+public abstract class AiCreature(string name, WorldPosition position, World world) : Creature(name, position, world)
 {
     public virtual void DoBehavior(IBehavior Behavior)
     {

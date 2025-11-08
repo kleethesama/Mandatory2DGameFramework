@@ -4,9 +4,8 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public abstract class Creature(string name, WorldPosition position) : WorldEntityBase(name, position), IHitSubject
+public abstract class Creature(string name, WorldPosition position, World world) : WorldEntityBase(name, position, world), IHitSubject
 {
-    private static readonly World _world;
     private readonly List<IHitObserver> _observers = [];
 
     public abstract int HitPoint { get; set; }
@@ -36,7 +35,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
 
     private void MoveTo(WorldPosition newPosition)
     {
-        if (newPosition.X > _world.MaxX || newPosition.Y > _world.MaxY)
+        if (newPosition.X > World.MaxX || newPosition.Y > World.MaxY)
         {
             throw new ArgumentException("New position exceeds world boundaries.", nameof(newPosition));
         }

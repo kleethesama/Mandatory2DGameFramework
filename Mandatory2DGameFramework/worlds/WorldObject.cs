@@ -5,17 +5,13 @@ public class WorldObject : WorldEntityBase
     public bool Lootable { get; set; }
     public bool Removeable { get; set; }
 
-    public WorldObject() : base()
-    {
-    }
-
-    public WorldObject(string name, bool lootable, bool removeable) : base(name)
+    public WorldObject(string name, World world, bool lootable, bool removeable) : base(name, world)
     {
         Lootable = lootable;
         Removeable = removeable;
     }
 
-    public WorldObject(string name, WorldPosition position, bool lootable, bool removeable) : base(name, position)
+    public WorldObject(string name, WorldPosition position, World world, bool lootable, bool removeable) : base(name, position, world)
     {
         Lootable = lootable;
         Removeable = removeable;

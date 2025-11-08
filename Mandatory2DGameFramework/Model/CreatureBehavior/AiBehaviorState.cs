@@ -1,4 +1,5 @@
 ﻿using Mandatory2DGameFramework.Model.Creatures;
+using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.CreatureBehavior;
 

@@ -17,6 +17,8 @@ public class IdleBirdBehavior(AiCreature aiCreature) : AiBehaviorState(aiCreatur
         throw new NotImplementedException();
     }
 
+    // This can probably be optimized by keeping the positions stored in
+    // in an array as relative positions to the bird.
     public bool TryScanDetectRange(out Creature? detectedCreature)
     {
         for (int i = 1; i < _aiCreature.DetectRange; i++)
@@ -25,8 +27,7 @@ public class IdleBirdBehavior(AiCreature aiCreature) : AiBehaviorState(aiCreatur
             {
                 WorldPosition detectPosition1 = _aiCreature.Position + new WorldPosition(i, j);
                 WorldPosition detectPosition2 = _aiCreature.Position + new WorldPosition(j, i);
-                // Check if a creature is in tile.
-                throw new NotImplementedException();
+                //aiCreature.World.TryIsPositionOccupied(detectPosition1, detectPosition2);
             }
         }
         detectedCreature = null;
