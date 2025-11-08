@@ -6,7 +6,7 @@ namespace Mandatory2DGameFramework.Model.Creatures;
 
 public abstract class Creature(string name, WorldPosition position) : WorldEntityBase(name, position), IHitSubject
 {
-    private static readonly World s_world;
+    private static readonly World _world;
     private readonly List<IHitObserver> _observers = [];
 
     public abstract int HitPoint { get; set; }
@@ -15,7 +15,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     public abstract List<AttackItem> AttackItems { get; set; }
     public abstract List<DefenceItem> DefenceItems { get; set; }
 
-    private static int CalculateMoveDistance(WorldPosition directionVector)
+    private static int CalculateDistance(WorldPosition directionVector)
     {
         double distance = Math.Sqrt(Math.Pow(directionVector.X, 2) + Math.Pow(directionVector.Y, 2));
         return (int)Math.Floor(distance);
@@ -24,7 +24,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
     public void Move(WorldPosition directionVector)
     {
         if (MoveRange == 0) { return; }
-        int moveDistance = CalculateMoveDistance(directionVector);
+        int moveDistance = CalculateDistance(directionVector);
         if (moveDistance > MoveRange)
         {
             throw new ArgumentException(
@@ -36,7 +36,7 @@ public abstract class Creature(string name, WorldPosition position) : WorldEntit
 
     private void MoveTo(WorldPosition newPosition)
     {
-        if (newPosition.X > s_world.MaxX || newPosition.Y > s_world.MaxY)
+        if (newPosition.X > _world.MaxX || newPosition.Y > _world.MaxY)
         {
             throw new ArgumentException("New position exceeds world boundaries.", nameof(newPosition));
         }
