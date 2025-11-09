@@ -11,4 +11,14 @@ public class GameDifficulty
         Hard = 2,
         VeryHard = 3
     }
+
+    public void SetDifficulty(Difficulty difficulty)
+    {
+        CurrentDifficulty = difficulty;
+    }
+
+    public void SetDifficulty(int difficultyId)
+    {
+        CurrentDifficulty = (Difficulty)difficultyId;
+    }
 }
