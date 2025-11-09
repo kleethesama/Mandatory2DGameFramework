@@ -1,16 +1,29 @@
-﻿namespace Mandatory2DGameFramework.Config;
+﻿using System.Xml;
+
+namespace Mandatory2DGameFramework.Config;
 
 public class WorldSizeConfigReader : ConfigReaderWorker<int[]>
 {
-    public override int[] DefaultValue { get; protected set; } = [20, 20];
+    protected override int[] Value { get; set; } = [20, 20];
 
-    public override void StartReadConfigFile()
+    public override void StartReadConfigFile(XmlDocument configFile)
     {
-        throw new NotImplementedException();
-    }
-
-    public override int[] GetValue()
-    {
-        throw new NotImplementedException();
+        XmlNode? worldSizeNode = configFile.SelectSingleNode("WorldSize");
+        if (worldSizeNode != null)
+        {
+            var array = new int[Value.Length];
+            for (int i = 0; i < worldSizeNode.ChildNodes.Count; i++)
+            {
+                string? value = worldSizeNode.ChildNodes[i].Value;
+                if (value == null)
+                {
+                    HasRead = true;
+                    return;
+                }
+                array[i] = Convert.ToInt32(value);
+            }
+            Value = array;
+        }
+        HasRead = true;
     }
 }

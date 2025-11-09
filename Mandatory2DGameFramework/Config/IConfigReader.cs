@@ -1,6 +1,20 @@
-﻿namespace Mandatory2DGameFramework.Config;
+﻿using System.Xml;
 
-public interface IConfigReader
+namespace Mandatory2DGameFramework.Config;
+
+public interface IConfigReader<T>
 {
-    public void ReadConfig();
+    public bool HasRead { get; protected set; }
+    protected abstract T Value { get; set; }
+
+    public abstract void StartReadConfigFile(XmlDocument configFile);
+
+    public T GetValue()
+    {
+        if (!HasRead)
+        {
+            throw new Exception("Make sure to set the HasRead property to true if the file was read.");
+        }
+        return Value;
+    }
 }

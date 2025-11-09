@@ -1,0 +1,6 @@
+<GameConfig>
+	<WorldSize>
+		<X>25</X>
+		<Y>30</Y>
+	</WorldSize>
+</GameConfig>

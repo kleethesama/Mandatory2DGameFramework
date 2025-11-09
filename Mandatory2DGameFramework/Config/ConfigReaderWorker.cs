@@ -1,13 +1,20 @@
-﻿namespace Mandatory2DGameFramework.Config;
+﻿using System.Xml;
+
+namespace Mandatory2DGameFramework.Config;
 
 public abstract class ConfigReaderWorker<T>
 {
-    public abstract T DefaultValue { get; protected set; }
+    public bool HasRead { get; protected set; } = false;
+    protected abstract T Value { get; set; }
 
-    public abstract void StartReadConfigFile();
+    public abstract void StartReadConfigFile(XmlDocument configFile);
 
-    public virtual T GetValue()
+    public T GetValue()
     {
-        return DefaultValue;
+        if (!HasRead)
+        {
+            throw new Exception("Make sure to set the HasRead property to true if the file was read.");
+        }
+        return Value;
     }
 }
