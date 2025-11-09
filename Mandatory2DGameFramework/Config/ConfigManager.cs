@@ -2,9 +2,11 @@
 
 namespace Mandatory2DGameFramework.Config;
 
-public class ConfigManager
+public sealed class ConfigManager
 {
     private static ConfigManager Instance;
+
+    public int[] WorldSize { get; private set; }
 
     private ConfigManager() { }
 
@@ -18,15 +20,16 @@ public class ConfigManager
     {
         var config = new XmlDocument();
         config.LoadXml(filePath);
+        SetWorldSize(config);
     }
 
-    //private void ReadWorldSize(XmlDocument xmlDoc)
-    //{
-    //    var worldSizeReader = new WorldSizeConfigReader();
-    //    worldSizeReader.StartReadConfigFile(xmlDoc);
-    //    if (worldSizeReader.HasRead)
-    //    {
-
-    //    }
-    //}
+    private void SetWorldSize(XmlDocument xmlDoc)
+    {
+        var reader = new WorldSizeConfigReader();
+        reader.StartReadConfigFile(xmlDoc);
+        if (reader.HasRead) // This is to support multi-threading if needed.
+        {
+            WorldSize = reader.GetValue();
+        }
+    }
 }
