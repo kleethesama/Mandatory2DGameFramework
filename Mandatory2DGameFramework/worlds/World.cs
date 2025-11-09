@@ -48,6 +48,6 @@ public class World
 
     public override string ToString()
     {
-        return $"{{{nameof(MaxX)}={MaxX}, {nameof(MaxY)}={MaxY}}}";
+        return $"{{{nameof(MaxX)} = {MaxX}, {nameof(MaxY)} = {MaxY}}}";
     }
 }

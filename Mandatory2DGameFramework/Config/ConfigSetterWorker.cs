@@ -1,7 +1,8 @@
 ﻿namespace Mandatory2DGameFramework.Config;
 
-public abstract class ConfigSetterWorker<T>
+public abstract class ConfigSetterWorker<T>(ConfigReaderWorker<T> reader)
 {
-    public abstract T Get();
-    public abstract void Set(T value);
+    public ConfigReaderWorker<T> Reader { get; protected set; } = reader;
+
+    public abstract void Set(ref T reference, T value);
 }

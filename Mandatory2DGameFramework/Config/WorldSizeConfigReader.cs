@@ -6,9 +6,9 @@ public class WorldSizeConfigReader : ConfigReaderWorker<int[]>
 {
     protected override int[] Value { get; set; } = [20, 20];
 
-    public override void StartReadConfigFile(XmlDocument configFile)
+    public override void StartReadConfigFile(XmlDocument xmlDoc)
     {
-        XmlNode? worldSizeNode = configFile.SelectSingleNode("WorldSize");
+        XmlNode? worldSizeNode = xmlDoc.SelectSingleNode("WorldSize");
         if (worldSizeNode != null)
         {
             var array = new int[Value.Length];

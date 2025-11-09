@@ -18,14 +18,15 @@ public class ConfigManager
     {
         var config = new XmlDocument();
         config.LoadXml(filePath);
-        _ = Task.Factory.StartNew(ReadWorldSize);
-        Task.Factory.Con
     }
 
-    private void ReadWorldSize(ConfigReaderWorker<int[]> worker)
-    {
-        var worldSizeReader = new WorldSizeConfigReader();
-        worldSizeReader.StartReadConfigFile(config);
-        var worldSizeSetter
-    }
+    //private void ReadWorldSize(XmlDocument xmlDoc)
+    //{
+    //    var worldSizeReader = new WorldSizeConfigReader();
+    //    worldSizeReader.StartReadConfigFile(xmlDoc);
+    //    if (worldSizeReader.HasRead)
+    //    {
+
+    //    }
+    //}
 }
