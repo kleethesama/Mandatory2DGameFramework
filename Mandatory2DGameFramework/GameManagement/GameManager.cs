@@ -1,0 +1,27 @@
+﻿using Mandatory2DGameFramework.Config;
+using Mandatory2DGameFramework.Worlds;
+
+namespace Mandatory2DGameFramework.GameManagement;
+
+public static class GameManager
+{
+    public static uint TurnCount { get; private set; } = 0;
+
+    public static void Start(Action customCode)
+    {
+        customCode();
+    }
+
+    public static void DefaultStart()
+    {
+        ConfigManager.Instance.StartConfiguring(
+            "C:\\Users\\fck\\source\\repos\\Mandatory2DGameFramework\\Mandatory2DGameFramework\\Config\\WorldTestFile.xml");
+        var world = new World(ConfigManager.Instance.WorldSize[0], ConfigManager.Instance.WorldSize[1]);
+        WorldManager.SetWorld(world);
+    }
+
+    public static uint NextTurn()
+    {
+        return TurnCount++;
+    }
+}

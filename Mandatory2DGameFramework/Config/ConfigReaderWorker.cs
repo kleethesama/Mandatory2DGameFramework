@@ -4,7 +4,7 @@ namespace Mandatory2DGameFramework.Config;
 
 public abstract class ConfigReaderWorker<T>
 {
-    public bool HasRead { get; protected set; } = false;
+    public bool HasRead { get; protected set; } = false; // This is to support multi-threading if needed.
     protected abstract T Value { get; set; }
 
     public abstract void StartReadConfigFile(XmlDocument configFile);

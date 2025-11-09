@@ -18,6 +18,14 @@ public class World
         _creatures = [];
     }
 
+    public World(int maxX, int maxY, List<WorldObject> worldObjects, List<Creature> creatures)
+    {
+        MaxX = maxX;
+        MaxY = maxY;
+        _worldObjects = worldObjects;
+        _creatures = creatures;
+    }
+
     public bool TryIsPositionOccupied(WorldPosition position, out Creature? creature)
     {
         foreach (var worldCreature in _creatures)

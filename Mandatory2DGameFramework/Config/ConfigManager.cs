@@ -15,7 +15,13 @@ public sealed class ConfigManager
     public void StartConfiguring(string filePath)
     {
         var config = new XmlDocument();
-        config.LoadXml(filePath);
+        try
+        {
+            config.Load(filePath); 
+        }
+        catch (DirectoryNotFoundException) // Uses default values later if loading fails.
+        {
+        }
         SetWorldSize(config);
     }
 
@@ -23,9 +29,6 @@ public sealed class ConfigManager
     {
         var reader = new WorldSizeConfigReader();
         reader.StartReadConfigFile(xmlDoc);
-        if (reader.HasRead) // This is to support multi-threading if needed.
-        {
-            WorldSize = reader.GetValue();
-        }
+        WorldSize = reader.GetValue();
     }
 }
