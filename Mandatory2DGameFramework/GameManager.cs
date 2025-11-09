@@ -21,13 +21,13 @@ public static class GameManager
 
     public static void Start()
     {
-        ConfigManager ??= ConfigManager.GetInstance();
-        WorldManager ??= WorldManager.GetInstance();
+        ConfigManager ??= ConfigManager.Instance;
+        WorldManager ??= WorldManager.Instance;
         Main();
     }
 
     private static void Main()
     {
-
+        //ConfigManager.StartConfiguring()
     }
 }

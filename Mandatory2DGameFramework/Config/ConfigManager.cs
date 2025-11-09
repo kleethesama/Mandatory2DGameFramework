@@ -4,17 +4,13 @@ namespace Mandatory2DGameFramework.Config;
 
 public sealed class ConfigManager
 {
-    private static ConfigManager Instance;
+    private static readonly Lazy<ConfigManager> _instance = new(() => new ConfigManager());
+
+    public static ConfigManager Instance { get => _instance.Value; }
 
     public int[] WorldSize { get; private set; }
 
     private ConfigManager() { }
-
-    public static ConfigManager GetInstance()
-    {
-        Instance ??= new ConfigManager();
-        return Instance;
-    }
 
     public void StartConfiguring(string filePath)
     {

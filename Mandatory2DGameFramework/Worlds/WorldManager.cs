@@ -2,19 +2,16 @@
 
 public sealed class WorldManager
 {
-    private static Lazy<WorldManager> Instance => new(() => new WorldManager());
+    private static readonly Lazy<WorldManager> _instance = new(() => new WorldManager());
+
+    public static WorldManager Instance { get => _instance.Value; }
 
     public World World { get; private set; }
 
     private WorldManager() { }
 
-    public static WorldManager GetInstance(World? world = null)
+    public static void SetWorld(World world)
     {
-        if (!Instance.IsValueCreated && world != null)
-        {
-            var worldManager = Instance.Value;
-            worldManager.World = world;
-        }
-        return Instance.Value;
+        Instance.World = world;
     }
 }
