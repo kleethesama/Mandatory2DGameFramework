@@ -21,8 +21,8 @@ public static class GameManager
         WorldManager.SetWorld(world);
     }
 
-    public static uint NextTurn()
+    public static void NextTurn()
     {
-        return TurnCount++;
+        TurnCount++;
     }
 }
