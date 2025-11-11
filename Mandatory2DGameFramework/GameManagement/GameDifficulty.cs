@@ -21,4 +21,9 @@ public class GameDifficulty
     {
         Current = (Difficulty)difficultyId;
     }
+
+    public override string ToString()
+    {
+        return $"{{{nameof(Current)} = {Current}}}"; ;
+    }
 }

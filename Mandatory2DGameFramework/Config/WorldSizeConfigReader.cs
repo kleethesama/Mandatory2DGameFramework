@@ -4,38 +4,29 @@ namespace Mandatory2DGameFramework.Config;
 
 public class WorldSizeConfigReader : ConfigReader<int[]>
 {
-    public override int[] DefaultValue { get; protected set; } = [20, 20];
+    public override int[] DefaultValue { get; } = [20, 20];
     protected override int[]? Value { get; set; }
 
     public override void StartReadConfigFile(XmlDocument xmlDoc)
     {
-        base.StartReadConfigFile(xmlDoc);
-        if (_parentNode == null) { return; }
-        XmlNode? worldSizeNode = _parentNode.SelectSingleNode("WorldSize");
-        if (worldSizeNode != null)
+        try
         {
-            if (TryConvertToValue(worldSizeNode, "X", out int valueX)
-                && TryConvertToValue(worldSizeNode, "Y", out int valueY))
-            {
-                Value = [valueX, valueY];
-            }
+            base.StartReadConfigFile(xmlDoc);
+            XmlNode? worldSizeNode = _parentNode?.SelectSingleNode("WorldSize");
+            Value = ConvertToValue(worldSizeNode);
+        }
+        catch (Exception)
+        {
+            Value = DefaultValue;
         }
     }
 
-    private static bool TryConvertToValue(XmlNode? parentNode, string xpath, out int value)
+    protected override int[] ConvertToValue(XmlNode? parentNode)
     {
-        if (parentNode == null)
-        {
-            value = default;
-            return false;
-        }
-        var mainNode = parentNode.SelectSingleNode(xpath);
-        if (mainNode == null)
-        {
-            value = default;
-            return false;
-        }
-        value = Convert.ToInt32(mainNode.InnerText);
-        return true;
+        if (parentNode == null) { return DefaultValue; }
+        var nodeX = parentNode.SelectSingleNode("X");
+        var nodeY = parentNode.SelectSingleNode("Y");
+        if (nodeX == null || nodeY == null) { return DefaultValue; }
+        return [Convert.ToInt32(nodeX.InnerText), Convert.ToInt32(nodeY.InnerText)];
     }
 }

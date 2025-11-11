@@ -9,6 +9,9 @@ namespace ExampleGame
         {
             GameManager.DefaultStart();
             Console.WriteLine(WorldManager.Instance.CurrentWorld);
+
+            Console.WriteLine(GameManager.GameDifficulty);
+
             GameManager.NextTurn();
             Console.WriteLine(GameManager.TurnCount);
         }
