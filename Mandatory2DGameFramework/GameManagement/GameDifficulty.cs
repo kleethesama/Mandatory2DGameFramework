@@ -2,7 +2,7 @@
 
 public class GameDifficulty
 {
-    public Difficulty CurrentDifficulty { get; private set; }
+    public Difficulty Current { get; private set; } = Difficulty.Normal;
 
     public enum Difficulty
     {
@@ -14,11 +14,11 @@ public class GameDifficulty
 
     public void SetDifficulty(Difficulty difficulty)
     {
-        CurrentDifficulty = difficulty;
+        Current = difficulty;
     }
 
     public void SetDifficulty(int difficultyId)
     {
-        CurrentDifficulty = (Difficulty)difficultyId;
+        Current = (Difficulty)difficultyId;
     }
 }

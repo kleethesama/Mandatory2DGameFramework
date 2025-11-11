@@ -9,6 +9,8 @@ namespace ExampleGame
         {
             GameManager.DefaultStart();
             Console.WriteLine(WorldManager.Instance.CurrentWorld);
+            GameManager.NextTurn();
+            Console.WriteLine(GameManager.TurnCount);
         }
     }
 }
