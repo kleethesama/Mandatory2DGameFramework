@@ -5,10 +5,9 @@ namespace Mandatory2DGameFramework.Config;
 public sealed class ConfigManager
 {
     private static readonly Lazy<ConfigManager> _instance = new(() => new ConfigManager());
+    private int[] _worldSize;
 
     public static ConfigManager Instance { get => _instance.Value; }
-
-    public int[] WorldSize { get; private set; }
 
     private ConfigManager() { }
 
@@ -17,19 +16,22 @@ public sealed class ConfigManager
         var config = new XmlDocument();
         try
         {
-            config.Load(filePath); 
+            config.Load(filePath);
         }
-        catch (DirectoryNotFoundException) // Uses default values later if loading fails.
+        catch (DirectoryNotFoundException) // Uses default values later if file doesn't exist.
         {
-            throw;
+            _worldSize = StartWorldSizeReader(config).DefaultValue;
+            return;
         }
-        SetWorldSize(config);
+        _worldSize = StartWorldSizeReader(config).GetValue();
     }
 
-    private void SetWorldSize(XmlDocument xmlDoc)
+    public int[] GetWorldSize() => [.. _worldSize];
+
+    private static ConfigReaderWorker<int[]> StartWorldSizeReader(XmlDocument xmlDoc)
     {
         var reader = new WorldSizeConfigReader();
         reader.StartReadConfigFile(xmlDoc);
-        WorldSize = reader.GetValue();
+        return reader;
     }
 }

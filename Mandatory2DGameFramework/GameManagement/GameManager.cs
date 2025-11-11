@@ -16,7 +16,8 @@ public static class GameManager
     {
         ConfigManager.Instance.StartConfiguring(
             "C:\\Users\\fck\\source\\repos\\Mandatory2DGameFramework\\Mandatory2DGameFramework\\Config\\WorldTestFile.xml");
-        var world = new World(ConfigManager.Instance.WorldSize[0], ConfigManager.Instance.WorldSize[1]);
+        int[] worldSize = ConfigManager.Instance.GetWorldSize();
+        var world = new World(worldSize[0], worldSize[1]);
         WorldManager.SetWorld(world);
     }
 

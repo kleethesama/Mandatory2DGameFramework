@@ -4,7 +4,8 @@ namespace Mandatory2DGameFramework.Config;
 
 public class WorldSizeConfigReader : ConfigReaderWorker<int[]>
 {
-    protected override int[] Value { get; set; } = [20, 20];
+    public override int[] DefaultValue { get; protected set; } = [20, 20];
+    protected override int[]? Value { get; set; }
 
     public override void StartReadConfigFile(XmlDocument xmlDoc)
     {
@@ -20,8 +21,7 @@ public class WorldSizeConfigReader : ConfigReaderWorker<int[]>
             if (TryConvertToValue(worldSizeNode, "X", out int valueX)
                 && TryConvertToValue(worldSizeNode, "Y", out int valueY))
             {
-                Value[0] = valueX;
-                Value[1] = valueY;
+                Value = [valueX, valueY];
             }
         }
         HasRead = true;
