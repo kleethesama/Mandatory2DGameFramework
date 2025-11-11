@@ -21,6 +21,7 @@ public sealed class ConfigManager
         }
         catch (DirectoryNotFoundException) // Uses default values later if loading fails.
         {
+            throw;
         }
         SetWorldSize(config);
     }

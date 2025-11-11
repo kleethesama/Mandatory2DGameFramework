@@ -8,22 +8,39 @@ public class WorldSizeConfigReader : ConfigReaderWorker<int[]>
 
     public override void StartReadConfigFile(XmlDocument xmlDoc)
     {
-        XmlNode? worldSizeNode = xmlDoc.SelectSingleNode("WorldSize");
+        XmlNode? GameConfigNode = xmlDoc.SelectSingleNode("GameConfig");
+        if (GameConfigNode == null)
+        {
+            HasRead = true;
+            return;
+        }
+        XmlNode? worldSizeNode = GameConfigNode.SelectSingleNode("WorldSize");
         if (worldSizeNode != null)
         {
-            var array = new int[Value.Length];
-            for (int i = 0; i < worldSizeNode.ChildNodes.Count; i++)
+            if (TryConvertToValue(worldSizeNode, "X", out int valueX)
+                && TryConvertToValue(worldSizeNode, "Y", out int valueY))
             {
-                string? value = worldSizeNode.ChildNodes[i]?.Value;
-                if (value == null)
-                {
-                    HasRead = true;
-                    return;
-                }
-                array[i] = Convert.ToInt32(value);
+                Value[0] = valueX;
+                Value[1] = valueY;
             }
-            Value = array;
         }
         HasRead = true;
+    }
+
+    private static bool TryConvertToValue(XmlNode? parentNode, string xpath, out int value)
+    {
+        if (parentNode == null)
+        {
+            value = default;
+            return false;
+        }
+        var mainNode = parentNode.SelectSingleNode(xpath);
+        if (mainNode == null)
+        {
+            value = default;
+            return false;
+        }
+        value = Convert.ToInt32(mainNode.InnerText);
+        return true;
     }
 }
