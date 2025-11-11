@@ -14,7 +14,7 @@ public class WorldSizeConfigReader : ConfigReaderWorker<int[]>
             var array = new int[Value.Length];
             for (int i = 0; i < worldSizeNode.ChildNodes.Count; i++)
             {
-                string? value = worldSizeNode.ChildNodes[i].Value;
+                string? value = worldSizeNode.ChildNodes[i]?.Value;
                 if (value == null)
                 {
                     HasRead = true;
