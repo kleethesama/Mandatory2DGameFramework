@@ -8,8 +8,8 @@ public sealed class ConfigManager
     private static readonly Lazy<ConfigManager> _instance = new(() => new ConfigManager());
 
     public static ConfigManager Instance { get => _instance.Value; }
-    public ConfigReaderWorker<int[]> WorldSizeReader { get; private set; } = new WorldSizeConfigReader();
-    public ConfigReaderWorker<GameDifficulty.Difficulty> DifficultyReader { get; private set; }
+    public ConfigReader<int[]> WorldSizeReader { get; private set; } = new WorldSizeConfigReader();
+    public ConfigReader<GameDifficulty.Difficulty> DifficultyReader { get; private set; }
 
     private ConfigManager() { }
 
