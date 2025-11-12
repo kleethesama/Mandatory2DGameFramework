@@ -1,4 +1,5 @@
 ﻿using Mandatory2DGameFramework.Config;
+using Mandatory2DGameFramework.Worlds;
 using System.Xml;
 
 namespace Mandatory2DGameFramework.GameManagement;
@@ -8,6 +9,7 @@ public class GameDifficulty : IConfigurable
     private static readonly Lazy<GameDifficulty> _instance = new(() => new GameDifficulty());
 
     public static GameDifficulty Instance { get => _instance.Value; }
+    public Configurator<GameDifficulty>? Configurator { get; set; } = new DifficultyConfigurator();
     public Difficulty Current { get; private set; } = Difficulty.Normal;
 
     public enum Difficulty
@@ -35,9 +37,9 @@ public class GameDifficulty : IConfigurable
         return $"{{{nameof(Current)} = {Current}}}"; ;
     }
 
-    public bool Configure(XmlDocument xmlDoc)
+    public bool TryConfigure(XmlDocument xmlDoc)
     {
-        var configurator = new DifficultyConfigurator();
-        return configurator.TryConfigure(xmlDoc, this);
+        if (Configurator  == null) { return false; }
+        return Configurator.TryConfigure(xmlDoc, this);
     }
 }

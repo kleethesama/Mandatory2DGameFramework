@@ -11,6 +11,7 @@ public class World : IConfigurable
 
     public int MaxX { get; set; }
     public int MaxY { get; set; }
+    public Configurator<World>? Configurator { get; set; } = new WorldSizeConfigurator();
 
     public World()
     {
@@ -69,9 +70,9 @@ public class World : IConfigurable
         return $"{{{nameof(MaxX)} = {MaxX}, {nameof(MaxY)} = {MaxY}}}";
     }
 
-    public bool Configure(XmlDocument xmlDoc)
+    public bool TryConfigure(XmlDocument xmlDoc)
     {
-        var configurator = new WorldSizeConfigurator();
-        return configurator.TryConfigure(xmlDoc, this);
+        if (Configurator == null) { return false; }
+        return Configurator.TryConfigure(xmlDoc, this);
     }
 }

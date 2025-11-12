@@ -16,7 +16,6 @@ public sealed class ConfigManager
 
     public void LoadConfigFile()
     {
-        if (_isXmlLoaded) { return; }
         try
         {
             _xmlDocument.Load(ConfigFilePath);
@@ -35,9 +34,9 @@ public sealed class ConfigManager
         {
             throw new Exception($"Xml file is not loaded: {nameof(_isXmlLoaded)} = {_isXmlLoaded}");
         }
-        foreach (var configer in configurables)
+        foreach (var configurator in configurables)
         {
-            if (!configer.Configure(_xmlDocument))
+            if (!configurator.TryConfigure(_xmlDocument))
             {
                 // Log that object failed to be modified.
             }
