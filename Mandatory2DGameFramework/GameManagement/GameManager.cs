@@ -6,21 +6,19 @@ namespace Mandatory2DGameFramework.GameManagement;
 public static class GameManager
 {
     public static uint TurnCount { get; private set; } = 0;
-    public static GameDifficulty GameDifficulty { get; } = new(); // Can be made into a lazy singleton.
 
-    public static void DefaultStart()
+    public static void DefaultSetup()
     {
-        var xmlDoc = ConfigManager.LoadConfigFile(
-            "C:\\Users\\fck\\source\\repos\\Mandatory2DGameFramework\\Mandatory2DGameFramework\\Config\\WorldTestFile.xml");
-        if (xmlDoc == null) { return; }
-        ConfigManager.Instance.ConfigureAll(xmlDoc);
+        var configurables = new IConfigurable[2];
+        var world = new World();
+        configurables[0] = world;
+        configurables[1] = GameDifficulty.Instance;
 
-        int[] worldSize = ConfigManager.Instance.WorldSizeReader.GetValue();
-        var world = new World(worldSize[0], worldSize[1]);
+        ConfigManager manager = ConfigManager.Instance;
+        manager.LoadConfigFile();
+        manager.ConfigureAll(configurables);
+
         WorldManager.SetWorld(world);
-
-        int difficulty = ConfigManager.Instance.DifficultyReader.GetValue();
-        GameDifficulty.SetDifficulty(difficulty);
     }
 
     public static void NextTurn()

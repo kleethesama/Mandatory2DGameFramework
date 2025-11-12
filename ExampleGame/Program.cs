@@ -7,10 +7,10 @@ namespace ExampleGame
     {
         static void Main(string[] args)
         {
-            GameManager.DefaultStart();
+            GameManager.DefaultSetup();
             Console.WriteLine(WorldManager.Instance.CurrentWorld);
 
-            Console.WriteLine(GameManager.GameDifficulty);
+            Console.WriteLine(GameDifficulty.Instance);
 
             GameManager.NextTurn();
             Console.WriteLine(GameManager.TurnCount);

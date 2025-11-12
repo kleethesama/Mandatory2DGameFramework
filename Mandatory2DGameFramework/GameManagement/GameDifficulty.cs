@@ -1,7 +1,13 @@
-﻿namespace Mandatory2DGameFramework.GameManagement;
+﻿using Mandatory2DGameFramework.Config;
+using System.Xml;
 
-public class GameDifficulty
+namespace Mandatory2DGameFramework.GameManagement;
+
+public class GameDifficulty : IConfigurable
 {
+    private static readonly Lazy<GameDifficulty> _instance = new(() => new GameDifficulty());
+
+    public static GameDifficulty Instance { get => _instance.Value; }
     public Difficulty Current { get; private set; } = Difficulty.Normal;
 
     public enum Difficulty
@@ -11,6 +17,8 @@ public class GameDifficulty
         Hard = 2,
         VeryHard = 3
     }
+
+    private GameDifficulty() { }
 
     public void SetDifficulty(Difficulty difficulty)
     {
@@ -25,5 +33,11 @@ public class GameDifficulty
     public override string ToString()
     {
         return $"{{{nameof(Current)} = {Current}}}"; ;
+    }
+
+    public bool Configure(XmlDocument xmlDoc)
+    {
+        var configurator = new DifficultyConfigurator();
+        return configurator.TryConfigure(xmlDoc, this);
     }
 }

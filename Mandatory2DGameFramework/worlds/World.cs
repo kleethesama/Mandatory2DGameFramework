@@ -1,14 +1,24 @@
-﻿using Mandatory2DGameFramework.Model.Creatures;
+﻿using Mandatory2DGameFramework.Config;
+using Mandatory2DGameFramework.Model.Creatures;
+using System.Xml;
 
 namespace Mandatory2DGameFramework.Worlds;
 
-public class World
+public class World : IConfigurable
 {
     private readonly List<WorldObject> _worldObjects;
     private readonly List<Creature> _creatures;
 
     public int MaxX { get; set; }
     public int MaxY { get; set; }
+
+    public World()
+    {
+        MaxX = 10;
+        MaxY = 10;
+        _worldObjects = [];
+        _creatures = [];
+    }
 
     public World(int maxX, int maxY)
     {
@@ -57,5 +67,11 @@ public class World
     public override string ToString()
     {
         return $"{{{nameof(MaxX)} = {MaxX}, {nameof(MaxY)} = {MaxY}}}";
+    }
+
+    public bool Configure(XmlDocument xmlDoc)
+    {
+        var configurator = new WorldSizeConfigurator();
+        return configurator.TryConfigure(xmlDoc, this);
     }
 }
