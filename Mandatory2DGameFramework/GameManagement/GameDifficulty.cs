@@ -1,6 +1,6 @@
 ﻿namespace Mandatory2DGameFramework.GameManagement;
 
-public class GameDifficulty
+public sealed class GameDifficulty
 {
     private static readonly Lazy<GameDifficulty> _instance = new(() => new GameDifficulty());
 
