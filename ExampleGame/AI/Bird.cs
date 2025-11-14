@@ -6,9 +6,10 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace ExampleGame.AI;
 
-public class Bird(string name, WorldPosition position, World world) : AiCreature(name, position, world)
+public class Bird(AiBehaviorState behaviorState, string name, WorldPosition position, World world) : AiCreature(name, position, world)
 {
-    public override IBehavior Behavior { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public override AiBehaviorState BehaviorState { protected get; set; } = behaviorState;
+    public override bool IsPlayer => false;
     public override int HitPoint { get; set; } = 10;
     public override int MoveRange { get; set; } = 5;
     public override int DetectRange { get; set; } = 3;

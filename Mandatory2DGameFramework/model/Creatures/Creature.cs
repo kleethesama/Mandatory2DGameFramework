@@ -8,6 +8,7 @@ public abstract class Creature(string name, WorldPosition position, World world)
 {
     private readonly List<IHitObserver> _observers = [];
 
+    public abstract bool IsPlayer { get; }
     public abstract int HitPoint { get; set; }
     public abstract int MoveRange { get; set; }
     public abstract int DetectRange { get; set; }
