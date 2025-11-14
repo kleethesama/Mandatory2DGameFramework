@@ -2,7 +2,7 @@
 
 namespace Mandatory2DGameFramework.Config;
 
-public interface IConfigurable
+public interface IConfigurator
 {
     public bool TryConfigure(XmlDocument xmlDoc);
 }

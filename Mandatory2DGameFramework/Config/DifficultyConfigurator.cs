@@ -3,9 +3,9 @@ using System.Xml;
 
 namespace Mandatory2DGameFramework.Config;
 
-public class DifficultyConfigurator : Configurator<GameDifficulty>
+public class DifficultyConfigurator(GameDifficulty configuredObject) : Configurator
 {
-    public override bool TryConfigure(XmlDocument xmlDoc, GameDifficulty configuredObject)
+    public override bool TryConfigure(XmlDocument xmlDoc)
     {
         base.StartReadConfigFile(xmlDoc);
         XmlNode? diffNode = _parentNode?.SelectSingleNode("Difficulty");

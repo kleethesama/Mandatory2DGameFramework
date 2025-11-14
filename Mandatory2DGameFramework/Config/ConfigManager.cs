@@ -28,7 +28,7 @@ public sealed class ConfigManager
         }
     }
 
-    public void ConfigureAll(IList<IConfigurable> configurables)
+    public void ConfigureAll(IList<IConfigurator> configurables)
     {
         if (!_isXmlLoaded)
         {

@@ -2,7 +2,7 @@
 
 namespace Mandatory2DGameFramework.Config;
 
-public abstract class Configurator<T> where T : class
+public abstract class Configurator : IConfigurator
 {
     protected XmlNode? _parentNode;
 
@@ -15,5 +15,5 @@ public abstract class Configurator<T> where T : class
         }
     }
 
-    public abstract bool TryConfigure(XmlDocument xmlDoc, T configuredObject);
+    public abstract bool TryConfigure(XmlDocument xmlDoc);
 }

@@ -3,9 +3,9 @@ using System.Xml;
 
 namespace Mandatory2DGameFramework.Config;
 
-public class WorldSizeConfigurator : Configurator<World>
+public class WorldSizeConfigurator(World configuredObject) : Configurator
 {
-    public override bool TryConfigure(XmlDocument xmlDoc, World configuredObject)
+    public override bool TryConfigure(XmlDocument xmlDoc)
     {
         base.StartReadConfigFile(xmlDoc);
         XmlNode? worldSizeNode = _parentNode?.SelectSingleNode("WorldSize");
