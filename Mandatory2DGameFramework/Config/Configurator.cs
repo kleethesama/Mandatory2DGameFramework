@@ -2,7 +2,7 @@
 
 namespace Mandatory2DGameFramework.Config;
 
-public abstract class Configurator : IConfigurator
+public abstract class Configurator
 {
     protected XmlNode? _parentNode;
 

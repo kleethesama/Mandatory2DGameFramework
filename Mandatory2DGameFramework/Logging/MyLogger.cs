@@ -5,21 +5,21 @@ namespace Mandatory2DGameFramework.Logging;
 public sealed class MyLogger
 {
     private static readonly Lazy<MyLogger> _instance = new(() => new MyLogger());
-    //private TraceSource _traceSource;
+    private TraceSource _traceSource;
 
     public static MyLogger Instance { get => _instance.Value; }
     public TraceSource TraceSource
     {
         get
         {
-            if (TraceSource != null) { return TraceSource; }
-            TraceSource = new TraceSource("FrameworkLog", SourceLevels.All)
+            if (_traceSource != null) { return _traceSource; }
+            _traceSource = new TraceSource("FrameworkLog", SourceLevels.All)
             {
                 Switch = new SourceSwitch("Log", SourceLevels.All.ToString())
             };
-            return TraceSource;
+            return _traceSource;
         }
-        private set { TraceSource = value; }
+        private set { _traceSource = value; }
     }
 
     private MyLogger() { }

@@ -1,5 +1,7 @@
 ﻿using Mandatory2DGameFramework.GameManagement;
+using Mandatory2DGameFramework.Logging;
 using Mandatory2DGameFramework.Worlds;
+using System.Diagnostics;
 
 namespace ExampleGame
 {
@@ -7,6 +9,8 @@ namespace ExampleGame
     {
         static void Main(string[] args)
         {
+            MyLogger.Instance.AddListener(new ConsoleTraceListener());
+
             GameManager.DefaultSetup();
             Console.WriteLine(WorldManager.Instance.CurrentWorld);
 

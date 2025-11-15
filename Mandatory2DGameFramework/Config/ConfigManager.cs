@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using Mandatory2DGameFramework.Logging;
+using System.Xml;
 
 namespace Mandatory2DGameFramework.Config;
 
@@ -23,12 +24,14 @@ public sealed class ConfigManager
         }
         catch (FileNotFoundException) // Uses default values if file doesn't exist.
         {
-            // Log what happened.
+            MyLogger.Instance.TraceSource.TraceEvent(
+                System.Diagnostics.TraceEventType.Error, 1,
+                "Couldn't find the XML config file. Default values will be used instead.");
             throw; // Rethrow so caller is aware this happened.
         }
     }
 
-    public void ConfigureAll(IList<IConfigurator> configurators)
+    public void ConfigureAll(IList<Configurator> configurators)
     {
         if (!_isXmlLoaded)
         {
@@ -38,7 +41,9 @@ public sealed class ConfigManager
         {
             if (!config.TryConfigure(_xmlDocument))
             {
-                // Log that object failed to be modified.
+                MyLogger.Instance.TraceSource.TraceEvent(
+                    System.Diagnostics.TraceEventType.Error, 2,
+                    $"The following configurator failed: {nameof(config)}");
             }
         }
     }

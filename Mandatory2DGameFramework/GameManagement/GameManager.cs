@@ -1,4 +1,5 @@
 ﻿using Mandatory2DGameFramework.Config;
+using Mandatory2DGameFramework.Logging;
 using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.GameManagement;
@@ -9,10 +10,14 @@ public static class GameManager
 
     public static void DefaultSetup()
     {
+        MyLogger.Instance.TraceSource.TraceEvent(
+            System.Diagnostics.TraceEventType.Information, 0,
+            "Starting default setup using the GameManager.");
+
         var world = new World();
         var diff = GameDifficulty.Instance;
 
-        var configs = new IConfigurator[2];
+        var configs = new Configurator[2];
         configs[0] = new WorldSizeConfigurator(world);
         configs[1] = new DifficultyConfigurator(diff);
 
