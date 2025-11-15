@@ -9,8 +9,9 @@ public abstract class AiCreature(string name, WorldPosition position, World worl
 
     public virtual void AiRoutine()
     {
-        if (TryScanDetectRange(out Creature? creature) && !creature.IsDead())
+        if (TryScanDetectRange(out Creature? creature))
         {
+            if (creature == null || creature.IsDead()) { return; }
             if (creature.IsPlayer)
             {
                 BehaviorState.PlayerReaction(creature);
