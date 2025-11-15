@@ -1,4 +1,6 @@
-﻿namespace Mandatory2DGameFramework.Worlds;
+﻿using Mandatory2DGameFramework.Logging;
+
+namespace Mandatory2DGameFramework.Worlds;
 
 public sealed class WorldManager
 {
@@ -12,6 +14,9 @@ public sealed class WorldManager
 
     public static void SetWorld(World world)
     {
+        MyLogger.Instance.GetTraceSource(nameof(WorldManager)).TraceEvent(
+            System.Diagnostics.TraceEventType.Information, 3,
+            $"Setting game world to: {world}");
         Instance.CurrentWorld = world;
     }
 }

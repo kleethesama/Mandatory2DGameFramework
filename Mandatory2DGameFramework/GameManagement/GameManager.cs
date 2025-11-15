@@ -10,7 +10,7 @@ public static class GameManager
 
     public static void DefaultSetup()
     {
-        MyLogger.Instance.TraceSource.TraceEvent(
+        MyLogger.Instance.GetTraceSource(nameof(GameManager)).TraceEvent(
             System.Diagnostics.TraceEventType.Information, 0,
             "Starting default setup using the GameManager.");
 

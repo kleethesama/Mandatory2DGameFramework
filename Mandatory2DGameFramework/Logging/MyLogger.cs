@@ -1,40 +1,111 @@
-﻿using System.Diagnostics;
+﻿using Mandatory2DGameFramework.Config;
+using Mandatory2DGameFramework.GameManagement;
+using Mandatory2DGameFramework.Worlds;
+using System.Diagnostics;
 
 namespace Mandatory2DGameFramework.Logging;
 
 public sealed class MyLogger
 {
     private static readonly Lazy<MyLogger> _instance = new(() => new MyLogger());
-    private TraceSource _traceSource;
+    private readonly List<TraceSource> _traceSources = [];
 
     public static MyLogger Instance { get => _instance.Value; }
-    public TraceSource TraceSource
+
+    private MyLogger()
     {
-        get
+        AddDefaultTraceSources();
+    }
+
+    private void AddDefaultTraceSources()
+    {
+        string[] classNames = [nameof(GameManager), nameof(ConfigManager), nameof(GameDifficulty), nameof(WorldManager)];
+        foreach (string className in classNames)
         {
-            if (_traceSource != null) { return _traceSource; }
-            _traceSource = new TraceSource("FrameworkLog", SourceLevels.All)
+            TraceSource traceSource = new(className, SourceLevels.All)
             {
-                Switch = new SourceSwitch("Log", SourceLevels.All.ToString())
+                Switch = new SourceSwitch("SourceSwitch", SourceLevels.All.ToString())
             };
-            return _traceSource;
+            AddTraceSource(traceSource);
         }
-        private set { _traceSource = value; }
     }
 
-    private MyLogger() { }
-
-    public void AddListener(TraceListener listener, EventTypeFilter? optionalFilter = null)
+    public TraceSource GetTraceSource(TraceSource traceSource)
     {
-        if (optionalFilter != null)
+        TraceSource source = _traceSources.FirstOrDefault(e => e == traceSource)
+            ?? throw new ArgumentException("Object does not exist in the list.", nameof(traceSource));
+        return source;
+    }
+
+    public TraceSource GetTraceSource(string name)
+    {
+        TraceSource source = _traceSources.FirstOrDefault(e => e.Name == name)
+            ?? throw new ArgumentException($"Object with name {name} does not exist in the list.", nameof(name));
+        return source;
+    }
+
+    public void AddTraceSource(TraceSource traceSource)
+    {
+        if (traceSource.Name == null)
         {
-            listener.Filter = optionalFilter;
+            throw new ArgumentException("TraceSource must have a name.", nameof(traceSource));
         }
-        TraceSource.Listeners.Add(listener);
+        _traceSources.Add(traceSource);
     }
 
-    public void RemoveListener(TraceListener listener)
+    public bool RemoveTraceSource(TraceSource traceSource)
     {
-        TraceSource.Listeners.Remove(listener);
+        return _traceSources.Remove(traceSource);
+    }
+
+    public bool RemoveTraceSource(string name)
+    {
+        TraceSource? source = _traceSources.FirstOrDefault(e => e.Name == name);
+        if (source == null) { return false; }
+        return _traceSources.Remove(source);
+    }
+
+    public TraceListenerCollection GetAllListeners(TraceSource traceSource)
+    {
+        return GetTraceSource(traceSource).Listeners;
+    }
+
+    public TraceListener GetListener(TraceSource traceSource, string name)
+    {
+        TraceListener? listener = GetTraceSource(traceSource).Listeners[name]
+            ?? throw new ArgumentException($"There are no listenser with the name: {name}", nameof(name));
+        return listener;
+    }
+
+    public void AddListener(TraceSource traceSource, TraceListener listener)
+    {
+        if (listener.Name == null)
+        {
+            throw new ArgumentException("Listener must have a name.", nameof(listener));
+        }
+        GetTraceSource(traceSource).Listeners.Add(listener);
+    }
+    public void AddListener(string traceSourceName, TraceListener listener)
+    {
+        if (listener.Name == null)
+        {
+            throw new ArgumentException("Listener must have a name.", nameof(listener));
+        }
+        GetTraceSource(traceSourceName).Listeners.Add(listener);
+    }
+
+    public void RemoveListener(TraceSource traceSource, TraceListener listener)
+    {
+        GetTraceSource(traceSource).Listeners.Remove(listener);
+        listener.Flush();
+        listener.Close();
+    }
+
+    public void RemoveListener(TraceSource traceSource, string name)
+    {
+        TraceListener listener = GetListener(traceSource, name);
+        Trace.Listeners.Remove(listener);
+        listener.Flush();
+        listener.Close();
     }
 }

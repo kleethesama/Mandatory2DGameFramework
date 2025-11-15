@@ -24,7 +24,7 @@ public sealed class ConfigManager
         }
         catch (FileNotFoundException) // Uses default values if file doesn't exist.
         {
-            MyLogger.Instance.TraceSource.TraceEvent(
+            MyLogger.Instance.GetTraceSource(nameof(ConfigManager))?.TraceEvent(
                 System.Diagnostics.TraceEventType.Error, 1,
                 "Couldn't find the XML config file. Default values will be used instead.");
             throw; // Rethrow so caller is aware this happened.
@@ -39,11 +39,15 @@ public sealed class ConfigManager
         }
         foreach (var config in configurators)
         {
+            MyLogger.Instance.GetTraceSource(nameof(ConfigManager)).TraceEvent(
+                System.Diagnostics.TraceEventType.Information, 2,
+                $"Configurating using configurator: {config.GetType()}");
+
             if (!config.TryConfigure(_xmlDocument))
             {
-                MyLogger.Instance.TraceSource.TraceEvent(
+                MyLogger.Instance.GetTraceSource(nameof(ConfigManager)).TraceEvent(
                     System.Diagnostics.TraceEventType.Error, 2,
-                    $"The following configurator failed: {nameof(config)}");
+                    $"The following configurator failed: {config.GetType()}");
             }
         }
     }

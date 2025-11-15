@@ -1,4 +1,6 @@
-﻿namespace Mandatory2DGameFramework.GameManagement;
+﻿using Mandatory2DGameFramework.Logging;
+
+namespace Mandatory2DGameFramework.GameManagement;
 
 public sealed class GameDifficulty
 {
@@ -19,12 +21,10 @@ public sealed class GameDifficulty
 
     public void SetDifficulty(Difficulty difficulty)
     {
+        MyLogger.Instance.GetTraceSource(nameof(GameDifficulty)).TraceEvent(
+            System.Diagnostics.TraceEventType.Information, 3,
+            $"Setting game difficulty to: {difficulty}");
         Current = difficulty;
-    }
-
-    public void SetDifficulty(int difficultyId)
-    {
-        Current = (Difficulty)difficultyId;
     }
 
     public override string ToString()

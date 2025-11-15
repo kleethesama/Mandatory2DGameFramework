@@ -38,7 +38,7 @@ public abstract class Creature(string name, WorldPosition position, World world)
     {
         if (newPosition.X > World.MaxX || newPosition.Y > World.MaxY)
         {
-            throw new ArgumentException("New position exceeds world boundaries.", nameof(newPosition));
+            throw new ArgumentException($"New position {newPosition} exceeds world boundaries.", nameof(newPosition));
         }
         Position = newPosition;
     }
