@@ -1,10 +1,40 @@
-﻿namespace Mandatory2DGameFramework.Logging;
+﻿using System.Diagnostics;
+
+namespace Mandatory2DGameFramework.Logging;
 
 public sealed class MyLogger
 {
     private static readonly Lazy<MyLogger> _instance = new(() => new MyLogger());
+    //private TraceSource _traceSource;
 
     public static MyLogger Instance { get => _instance.Value; }
+    public TraceSource TraceSource
+    {
+        get
+        {
+            if (TraceSource != null) { return TraceSource; }
+            TraceSource = new TraceSource("FrameworkLog", SourceLevels.All)
+            {
+                Switch = new SourceSwitch("Log", SourceLevels.All.ToString())
+            };
+            return TraceSource;
+        }
+        private set { TraceSource = value; }
+    }
 
     private MyLogger() { }
+
+    public void AddListener(TraceListener listener, EventTypeFilter? optionalFilter = null)
+    {
+        if (optionalFilter != null)
+        {
+            listener.Filter = optionalFilter;
+        }
+        TraceSource.Listeners.Add(listener);
+    }
+
+    public void RemoveListener(TraceListener listener)
+    {
+        TraceSource.Listeners.Remove(listener);
+    }
 }
