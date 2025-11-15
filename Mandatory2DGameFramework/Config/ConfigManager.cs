@@ -28,15 +28,15 @@ public sealed class ConfigManager
         }
     }
 
-    public void ConfigureAll(IList<IConfigurator> configurables)
+    public void ConfigureAll(IList<IConfigurator> configurators)
     {
         if (!_isXmlLoaded)
         {
             throw new Exception($"Xml file is not loaded: {nameof(_isXmlLoaded)} = {_isXmlLoaded}");
         }
-        foreach (var configurator in configurables)
+        foreach (var config in configurators)
         {
-            if (!configurator.TryConfigure(_xmlDocument))
+            if (!config.TryConfigure(_xmlDocument))
             {
                 // Log that object failed to be modified.
             }
