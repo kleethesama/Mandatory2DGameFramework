@@ -3,7 +3,7 @@ using Mandatory2DGameFramework.Model.Creatures;
 
 namespace ExampleGame.AI;
 
-public class IdleBirdBehavior(AiCreature aiCreature) : AiBehaviorState(aiCreature)
+internal class IdleBirdBehavior(AiCreature aiCreature) : AiBehaviorState(aiCreature)
 {
     public override string Description => "Behavior for when a bird is idle.";
 

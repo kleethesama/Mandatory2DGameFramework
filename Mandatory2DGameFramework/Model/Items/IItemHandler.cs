@@ -5,14 +5,18 @@ namespace Mandatory2DGameFramework.Model.Items;
 
 public interface IItemHandler
 {
-    public void GetAttackItem(string name);
-    public void GetDefenceItem(string name);
-    public void GetAttackItem(int id);
-    public void GetDefenceItem(int id);
-    public void AddAttackItem(AttackItem attackItem);
-    public void AddDefenceItem(DefenceItem defenceItem);
-    public void RemoveAttackItem(string name);
-    public void RemoveDefenceItem(string name);
-    public void RemoveAttackItem(int id);
-    public void RemoveDefenceItem(int id);
+    public int MaxItems { get; }
+
+    public bool IsAllowedAttackItem(AttackItem attackItem);
+    public bool IsAllowedDefenceItem(DefenceItem defenceItem);
+    public void GetAttackItem(string name, List<AttackItem> attackItems);
+    public void GetDefenceItem(string name, List<DefenceItem> defenceItems);
+    public void GetAttackItem(int id, List<AttackItem> attackItems);
+    public void GetDefenceItem(int id, List<DefenceItem> defenceItems);
+    public void AddAttackItem(AttackItem attackItem, List<AttackItem> attackItems);
+    public void AddDefenceItem(DefenceItem defenceItem, List<DefenceItem> defenceItems);
+    public void RemoveAttackItem(string name, List<AttackItem> attackItems);
+    public void RemoveDefenceItem(string name, List<DefenceItem> defenceItems);
+    public void RemoveAttackItem(int id, List<AttackItem> attackItems);
+    public void RemoveDefenceItem(int id, List<DefenceItem> defenceItems);
 }

@@ -49,12 +49,12 @@ public abstract class Creature(string name, WorldPosition position, World world)
 
     public void AddAttackItem(AttackItem attackItem)
     {
-        AttackItems.Add(attackItem);
+        ItemHandler.AddAttackItem(attackItem);
     }
 
     public void AddDefenceItem(DefenceItem defenceItem)
     {
-        DefenceItems.Add(defenceItem);
+        ItemHandler.AddDefenceItem(defenceItem);
     }
 
     public int Hit(Creature creature)
