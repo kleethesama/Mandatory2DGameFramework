@@ -51,7 +51,7 @@ public abstract class Creature(string name, WorldPosition position, World world)
 
     public void AddAttackItem(AttackItem attackItem)
     {
-        ItemHandler.AddAttackItem(attackItem, AttackItems);
+        ItemHandler.AddAttackItem(attackItem, AttackItems); // Uses strategy to handle items
     }
 
     public void AddDefenceItem(DefenceItem defenceItem)
@@ -96,6 +96,7 @@ public abstract class Creature(string name, WorldPosition position, World world)
 
     private bool IsPlaceDistanceSufficient(WorldPosition position)
     {
+        // Probably shouldn't hard code the place distance, but oh well.
         if (CalculateDistance(position - Position) > 1) { return false; }
         return true;
     }
