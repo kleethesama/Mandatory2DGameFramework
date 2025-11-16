@@ -78,9 +78,38 @@ public abstract class Creature(string name, WorldPosition position, World world)
         NotfiyHit();
     }
 
+    private bool IsPlaceDistanceSufficient(WorldPosition position)
+    {
+        if (CalculateDistance(position - Position) > 1) { return false; }
+        return true;
+    }
+
+    public void PlaceItemInWorld(WorldPosition position, WorldObject obj)
+    {
+        if (!IsPlaceDistanceSufficient(position)) { return; }
+        throw new NotImplementedException();
+    }
+
     public void Loot(WorldObject obj)
     {
+        if (!obj.Lootable) { return; }
         throw new NotImplementedException();
+    }
+
+    public bool CanLootPosition(WorldPosition position, out WorldObject? foundObject)
+    {
+        if (!World.TryIsPositionOccupied(position, out WorldObject? worldObject))
+        {
+            foundObject = null;
+            return false;
+        }
+        foundObject = worldObject;
+        return true;
+    }
+
+    public WorldObject? GetLootObject(WorldPosition position)
+    {
+
     }
 
     public bool IsDead()
