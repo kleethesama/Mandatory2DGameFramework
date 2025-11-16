@@ -14,7 +14,7 @@ public static class GameManager
             System.Diagnostics.TraceEventType.Information, 0,
             "Starting default setup using the GameManager.");
 
-        var world = new World(20, 20);
+        var world = new World();
         var diff = GameDifficulty.Instance;
 
         var configs = new Configurator[2];
