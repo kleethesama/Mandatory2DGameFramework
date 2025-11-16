@@ -1,9 +1,12 @@
 ﻿using Mandatory2DGameFramework.Model.Creatures;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Mandatory2DGameFramework.Worlds;
 
 public class World
 {
+    //private readonly List<WorldEntityBase> _worldEntities; // This is better for checking them in the world.
     private readonly List<WorldObject> _worldObjects;
     private readonly List<Creature> _creatures;
 
@@ -14,6 +17,7 @@ public class World
     {
         MaxX = 10;
         MaxY = 10;
+        //_worldEntities = [];
         _worldObjects = [];
         _creatures = [];
     }
@@ -22,6 +26,7 @@ public class World
     {
         MaxX = maxX;
         MaxY = maxY;
+        //_worldEntities = [];
         _worldObjects = [];
         _creatures = [];
     }
@@ -32,6 +37,9 @@ public class World
         MaxY = maxY;
         _worldObjects = worldObjects;
         _creatures = creatures;
+        //List<WorldEntityBase> entityList = new(_worldObjects);
+        //entityList.AddRange(_creatures.AsEnumerable<WorldEntityBase>());
+        //_worldEntities = entityList;
     }
 
     public bool TryIsPositionOccupied(WorldPosition position, out Creature? creature)
