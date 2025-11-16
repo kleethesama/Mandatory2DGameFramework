@@ -70,6 +70,24 @@ public class World
         return false;
     }
 
+    public void AddCreature(Creature creature)
+    {
+        _creatures.Add(creature);
+    }
+
+    public bool RemoveCreature(Creature creature)
+    {
+        return _creatures.Remove(creature);
+    }
+
+    public void PopulateWorld(List<Creature> creatures)
+    {
+        foreach (Creature creature in creatures)
+        {
+            AddCreature(creature);
+        }
+    }
+
     public override string ToString()
     {
         return $"{{{nameof(MaxX)} = {MaxX}, {nameof(MaxY)} = {MaxY}}}";
