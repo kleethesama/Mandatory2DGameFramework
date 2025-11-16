@@ -1,5 +1,6 @@
-﻿using Mandatory2DGameFramework.Model.Attack;
-using Mandatory2DGameFramework.Model.Defence;
+﻿using Mandatory2DGameFramework.Model.Items;
+using Mandatory2DGameFramework.Model.Items.Attack;
+using Mandatory2DGameFramework.Model.Items.Defence;
 using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
@@ -12,8 +13,9 @@ public abstract class Creature(string name, WorldPosition position, World world)
     public abstract int HitPoint { get; set; }
     public abstract int MoveRange { get; set; }
     public abstract int DetectRange { get; set; }
-    public abstract List<AttackItem> AttackItems { get; set; }
-    public abstract List<DefenceItem> DefenceItems { get; set; }
+    public abstract List<AttackItem> AttackItems { protected get; set; }
+    public abstract List<DefenceItem> DefenceItems { protected get; set; }
+    public abstract IItemHandler ItemHandler { protected get; set; } // Strategy pattern
 
     private static int CalculateDistance(WorldPosition directionVector)
     {
@@ -38,9 +40,21 @@ public abstract class Creature(string name, WorldPosition position, World world)
     {
         if (newPosition.X > World.MaxX || newPosition.Y > World.MaxY)
         {
-            throw new ArgumentException($"New position {newPosition} exceeds world boundaries.", nameof(newPosition));
+            throw new ArgumentException(
+                $"New position {newPosition} exceeds world boundaries.",
+                nameof(newPosition));
         }
         Position = newPosition;
+    }
+
+    public void AddAttackItem(AttackItem attackItem)
+    {
+        AttackItems.Add(attackItem);
+    }
+
+    public void AddDefenceItem(DefenceItem defenceItem)
+    {
+        DefenceItems.Add(defenceItem);
     }
 
     public int Hit(Creature creature)

@@ -1,7 +1,7 @@
-﻿using Mandatory2DGameFramework.Model.Attack;
-using Mandatory2DGameFramework.Model.CreatureBehavior;
+﻿using Mandatory2DGameFramework.Model.CreatureBehavior;
 using Mandatory2DGameFramework.Model.Creatures;
-using Mandatory2DGameFramework.Model.Defence;
+using Mandatory2DGameFramework.Model.Items.Attack;
+using Mandatory2DGameFramework.Model.Items.Defence;
 using Mandatory2DGameFramework.Worlds;
 
 namespace ExampleGame.AI;

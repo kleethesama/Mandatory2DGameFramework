@@ -1,7 +1,7 @@
 ﻿using Mandatory2DGameFramework.Model.Inventory;
 using Mandatory2DGameFramework.Worlds;
 
-namespace Mandatory2DGameFramework.Model.Defence;
+namespace Mandatory2DGameFramework.Model.Items.Defence;
 
 public class DefenceItem : Loot
 {
