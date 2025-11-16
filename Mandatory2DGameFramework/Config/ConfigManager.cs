@@ -24,7 +24,7 @@ public sealed class ConfigManager
         }
         catch (FileNotFoundException) // Uses default values if file doesn't exist.
         {
-            MyLogger.Instance.GetTraceSource(nameof(ConfigManager))?.TraceEvent(
+            MyLogger.Instance.GetTraceSource(nameof(ConfigManager)).TraceEvent(
                 System.Diagnostics.TraceEventType.Error, 1,
                 "Couldn't find the XML config file. Default values will be used instead.");
             throw; // Rethrow so caller is aware this happened.
