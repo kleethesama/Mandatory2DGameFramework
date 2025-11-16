@@ -13,15 +13,6 @@ public class World
     public int MaxX { get; set; }
     public int MaxY { get; set; }
 
-    public World()
-    {
-        MaxX = 10;
-        MaxY = 10;
-        //_worldEntities = [];
-        _worldObjects = [];
-        _creatures = [];
-    }
-
     public World(int maxX, int maxY)
     {
         MaxX = maxX;
