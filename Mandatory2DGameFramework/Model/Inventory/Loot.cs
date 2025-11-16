@@ -4,10 +4,9 @@ namespace Mandatory2DGameFramework.Model.Inventory;
 
 public abstract class Loot
 {
-    private readonly WorldObject? _worldObject;
-
     public int Id { get; private set; }
     public string Name { get; private set; }
+    public WorldObject? WorldObject { get; private set; }
 
     public Loot(int id, string name)
     {
@@ -17,11 +16,7 @@ public abstract class Loot
 
     public Loot(WorldObject worldObject, int id, string name)
     {
-        //if (!worldObject.Lootable)
-        //{
-        //    throw new ArgumentException("A loot's world object must be lootable.", nameof(worldObject));
-        //}
-        _worldObject = worldObject;
+        WorldObject = worldObject;
         Id = id;
         Name = name;
     }

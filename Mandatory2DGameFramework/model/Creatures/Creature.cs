@@ -1,4 +1,5 @@
-﻿using Mandatory2DGameFramework.Model.Items;
+﻿using Mandatory2DGameFramework.Model.Inventory;
+using Mandatory2DGameFramework.Model.Items;
 using Mandatory2DGameFramework.Model.Items.Attack;
 using Mandatory2DGameFramework.Model.Items.Defence;
 using Mandatory2DGameFramework.Worlds;
@@ -10,7 +11,8 @@ public abstract class Creature(string name, WorldPosition position, World world)
     private readonly List<IHitObserver> _observers = [];
 
     public abstract bool IsPlayer { get; }
-    public abstract int HitPoint { get; set; }
+    public abstract int MaxHitPoint { get; protected set; }
+    public abstract int HitPoint { get; protected set; }
     public abstract int MoveRange { get; set; }
     public abstract int DetectRange { get; set; }
     public abstract List<AttackItem> AttackItems { protected get; set; }
@@ -49,12 +51,12 @@ public abstract class Creature(string name, WorldPosition position, World world)
 
     public void AddAttackItem(AttackItem attackItem)
     {
-        ItemHandler.AddAttackItem(attackItem);
+        ItemHandler.AddAttackItem(attackItem, AttackItems);
     }
 
     public void AddDefenceItem(DefenceItem defenceItem)
     {
-        ItemHandler.AddDefenceItem(defenceItem);
+        ItemHandler.AddDefenceItem(defenceItem, DefenceItems);
     }
 
     public int Hit(Creature creature)
@@ -104,10 +106,18 @@ public abstract class Creature(string name, WorldPosition position, World world)
         throw new NotImplementedException();
     }
 
-    public void Loot(WorldObject obj)
+    public void Loot(Loot obj)
     {
-        if (!obj.Lootable) { return; }
-        throw new NotImplementedException();
+        if (obj.WorldObject != null && !obj.WorldObject.Lootable) { return; }
+        Type objType = obj.GetType();
+        if (objType == typeof(AttackItem))
+        {
+            AddAttackItem(obj as AttackItem);
+        }
+        else if (objType == typeof(DefenceItem))
+        {
+            AddDefenceItem(obj as DefenceItem);
+        }
     }
 
     public bool CanLootPosition(WorldPosition position, out WorldObject? foundObject)

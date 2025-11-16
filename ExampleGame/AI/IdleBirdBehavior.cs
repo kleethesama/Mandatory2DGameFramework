@@ -9,6 +9,11 @@ internal class IdleBirdBehavior(AiCreature aiCreature) : AiBehaviorState(aiCreat
 
     public override void NpcReaction(Creature creature)
     {
+        if (_aiCreature.HitPoint <= _aiCreature.MaxHitPoint * 0.5)
+        {
+            Flee();
+            return;
+        }
         Idle();
     }
 

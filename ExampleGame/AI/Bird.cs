@@ -11,7 +11,8 @@ internal class Bird(AiBehaviorState behaviorState, string name, WorldPosition po
 {
     public override AiBehaviorState BehaviorState { protected get; set; } = behaviorState;
     public override bool IsPlayer => false;
-    public override int HitPoint { get; set; } = 10;
+    public override int MaxHitPoint { get; protected set; } = 10;
+    public override int HitPoint { get; protected set; } = 10;
     public override int MoveRange { get; set; } = 5;
     public override int DetectRange { get; set; } = 3;
     public override List<AttackItem> AttackItems { protected get; set; } = [];
