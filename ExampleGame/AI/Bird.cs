@@ -1,4 +1,5 @@
-﻿using Mandatory2DGameFramework.Model.CreatureBehavior;
+﻿using ExampleGame.Items;
+using Mandatory2DGameFramework.Model.CreatureBehavior;
 using Mandatory2DGameFramework.Model.Creatures;
 using Mandatory2DGameFramework.Model.Items;
 using Mandatory2DGameFramework.Model.Items.Attack;
@@ -7,9 +8,9 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace ExampleGame.AI;
 
-internal class Bird(AiBehaviorState behaviorState, string name, WorldPosition position, World world) : AiCreature(name, position, world)
+internal class Bird : AiCreature
 {
-    public override AiBehaviorState BehaviorState { protected get; set; } = behaviorState;
+    public override AiBehaviorState BehaviorState { protected get; set; }
     public override bool IsPlayer => false;
     public override int MaxHitPoint { get; protected set; } = 10;
     public override int HitPoint { get; protected set; } = 10;
@@ -17,5 +18,22 @@ internal class Bird(AiBehaviorState behaviorState, string name, WorldPosition po
     public override int DetectRange { get; set; } = 3;
     public override List<AttackItem> AttackItems { protected get; set; } = [];
     public override List<DefenceItem> DefenceItems { protected get; set; } = [];
-    public override IItemHandler ItemHandler { protected get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public override IItemHandler ItemHandler { protected get; set; } = new BirdItemHandler();
+
+    public Bird(string name, WorldPosition position, World world) : base(name, position, world)
+    {
+        BehaviorState = new IdleBirdBehavior(this);
+    }
+
+    public Bird(string name, WorldPosition position, World world, int maxHitPoint, int hitPoint, int moveRange, int detectRange, List<AttackItem> attackItems, List<DefenceItem> defenceItems, IItemHandler itemHandler) : this(name, position, world)
+    {
+        BehaviorState = new IdleBirdBehavior(this);
+        MaxHitPoint = maxHitPoint;
+        HitPoint = hitPoint;
+        MoveRange = moveRange;
+        DetectRange = detectRange;
+        AttackItems = attackItems;
+        DefenceItems = defenceItems;
+        ItemHandler = itemHandler;
+    }
 }
