@@ -7,14 +7,14 @@ public abstract class CreatureFactory
 {
     public abstract World World { get; }
 
-    public abstract Creature CreateRandom(World world);
+    public abstract Creature CreateRandom();
 
     public List<Creature> CreateRandoms(int creatureCount)
     {
         List<Creature> createdCreatures = [];
         for (int i = 0; i < creatureCount; i++)
         {
-            createdCreatures.Add(CreateRandom(World));
+            createdCreatures.Add(CreateRandom());
         }
         return createdCreatures;
     }
