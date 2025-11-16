@@ -1,30 +1,35 @@
-﻿using Mandatory2DGameFramework.Config;
+﻿using ExampleGame.Factory;
+using Mandatory2DGameFramework.Config;
 using Mandatory2DGameFramework.GameManagement;
 using Mandatory2DGameFramework.Logging;
+using Mandatory2DGameFramework.Model.Creatures;
 using Mandatory2DGameFramework.Worlds;
 using System.Diagnostics;
 
-namespace ExampleGame
+namespace ExampleGame;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        TraceListener listener = new ConsoleTraceListener
         {
-            TraceListener listener = new ConsoleTraceListener
-            {
-                Name = "ConfigManagerListener",
-                Filter = new EventTypeFilter(SourceLevels.All)
-            };
-            MyLogger.Instance.AddListener(nameof(ConfigManager), listener);
+            Name = "ConfigManagerListener",
+            Filter = new EventTypeFilter(SourceLevels.All)
+        };
+        MyLogger.Instance.AddListener(nameof(ConfigManager), listener);
 
-            GameManager.DefaultSetup();
+        GameManager.DefaultSetup();
 
-            Console.WriteLine(WorldManager.Instance.CurrentWorld);
+        Console.WriteLine(WorldManager.Instance.CurrentWorld);
 
-            Console.WriteLine(GameDifficulty.Instance);
+        Console.WriteLine(GameDifficulty.Instance);
 
-            GameManager.NextTurn();
-            Console.WriteLine(GameManager.TurnCount);
+        var factory = new BirdFactory(WorldManager.Instance.CurrentWorld);
+        List<Creature> creatures = factory.CreateRandoms(5);
+        foreach (Creature creature in creatures)
+        {
+            Console.WriteLine(creature);
         }
     }
 }

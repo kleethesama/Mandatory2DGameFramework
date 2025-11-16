@@ -145,9 +145,11 @@ public abstract class Creature(string name, WorldPosition position, World world)
     public override string ToString()
     {
         return base.ToString() +
-            $", {nameof(HitPoint)} = {HitPoint}, " +
-            $"{nameof(AttackItems)} = {AttackItems}, " +
-            $"{nameof(DefenceItems)} = {DefenceItems}}}";
+            $", {nameof(IsPlayer)} = {IsPlayer}, " +
+            $"{nameof(MaxHitPoint)} = {MaxHitPoint}, " +
+            $"{nameof(HitPoint)} = {HitPoint}, " +
+            $"{nameof(MoveRange)} = {MoveRange}, " +
+            $"{nameof(DetectRange)} = {DetectRange}}}";
     }
 
     public void Attach(IHitObserver observer)
