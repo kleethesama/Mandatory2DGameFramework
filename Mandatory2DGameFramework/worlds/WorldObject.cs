@@ -1,9 +1,9 @@
 ﻿namespace Mandatory2DGameFramework.Worlds;
 
-public class WorldObject : WorldEntityBase
+public abstract class WorldObject : WorldEntityBase
 {
-    public bool Lootable { get; set; }
-    public bool Removeable { get; set; }
+    public abstract bool Lootable { get; protected set; }
+    public abstract bool Removeable { get; protected set; }
 
     public WorldObject(string name, World world, bool lootable, bool removeable) : base(name, world)
     {

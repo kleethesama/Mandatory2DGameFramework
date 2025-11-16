@@ -1,6 +1,6 @@
 ﻿namespace Mandatory2DGameFramework.Worlds;
 
-public class WorldEntityBase
+public abstract class WorldEntityBase
 {
     public World World { get; }
     public WorldPosition Position { get; set; }
