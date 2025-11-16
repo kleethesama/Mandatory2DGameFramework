@@ -109,7 +109,7 @@ public abstract class Creature(string name, WorldPosition position, World world)
 
     public WorldObject? GetLootObject(WorldPosition position)
     {
-
+        throw new NotImplementedException();
     }
 
     public bool IsDead()
