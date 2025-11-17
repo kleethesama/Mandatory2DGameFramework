@@ -15,8 +15,8 @@ public abstract class Creature(string name, WorldPosition position, World world)
     public abstract int HitPoint { get; protected set; }
     public abstract int MoveRange { get; set; }
     public abstract int DetectRange { get; set; }
-    public abstract List<AttackItem> AttackItems { protected get; set; }
-    public abstract List<DefenceItem> DefenceItems { protected get; set; }
+    public abstract List<AttackItem> AttackItems { get; set; }
+    public abstract List<DefenceItem> DefenceItems { get; set; }
     public abstract IItemHandler ItemHandler { protected get; set; } // Strategy pattern
 
     private static int CalculateDistance(WorldPosition directionVector)

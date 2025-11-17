@@ -16,8 +16,8 @@ internal class Bird : AiCreature
     public override int HitPoint { get; protected set; } = 10;
     public override int MoveRange { get; set; } = 5;
     public override int DetectRange { get; set; } = 3;
-    public override List<AttackItem> AttackItems { protected get; set; } = [];
-    public override List<DefenceItem> DefenceItems { protected get; set; } = [];
+    public override List<AttackItem> AttackItems { get; set; } = [];
+    public override List<DefenceItem> DefenceItems { get; set; } = [];
     public override IItemHandler ItemHandler { protected get; set; } = new BirdItemHandler();
 
     public Bird(string name, WorldPosition position, World world) : base(name, position, world)

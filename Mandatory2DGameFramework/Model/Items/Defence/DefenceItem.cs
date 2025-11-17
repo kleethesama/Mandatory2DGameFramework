@@ -1,5 +1,5 @@
 ﻿using Mandatory2DGameFramework.Model.Inventory;
-using Mandatory2DGameFramework.Worlds;
+using Mandatory2DGameFramework.Model.Items.Defence.Component;
 
 namespace Mandatory2DGameFramework.Model.Items.Defence;
 
@@ -12,9 +12,9 @@ public class DefenceItem : Loot
         ReduceHitPoint = reduceHitPoint;
     }
 
-    public DefenceItem(int reduceHitPoint, WorldObject worldObject, int id, string name) : base(worldObject, id, name)
+    public void ApplyBuff(BuffComponent component, int defencePoints)
     {
-        ReduceHitPoint = reduceHitPoint;
+        component.ApplyBuff(this, defencePoints);
     }
 
     public override string ToString()

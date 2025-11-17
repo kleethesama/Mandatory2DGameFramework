@@ -2,10 +2,10 @@
 
 namespace Mandatory2DGameFramework.Model.Items.Defence.ComponentImplementation;
 
-public class SetDefence : BuffComponent
+public class AddDefence : BuffComponent
 {
     public override void ApplyBuff(DefenceItem defenceItem, int defencePoints)
     {
-        defenceItem.ReduceHitPoint = defencePoints;
+        defenceItem.ReduceHitPoint += defencePoints;
     }
 }

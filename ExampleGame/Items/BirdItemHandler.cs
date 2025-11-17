@@ -10,7 +10,7 @@ internal class BirdItemHandler : IItemHandler // Implemented strategy pattern
 
     public void AddAttackItem(AttackItem attackItem, List<AttackItem> attackItems)
     {
-        if (!IsAllowedAttackItem(attackItem)) { return; }
+        //if (!IsAllowedAttackItem(attackItem)) { return; }
         if (attackItems.Count < MaxItems)
         {
             attackItems.Add(attackItem);
@@ -29,7 +29,7 @@ internal class BirdItemHandler : IItemHandler // Implemented strategy pattern
 
     public void AddDefenceItem(DefenceItem defenceItem, List<DefenceItem> defenceItems)
     {
-        if (!IsAllowedDefenceItem(defenceItem)) { return; }
+        //if (!IsAllowedDefenceItem(defenceItem)) { return; }
         if (defenceItems.Count < MaxItems)
         {
             defenceItems.Add(defenceItem);

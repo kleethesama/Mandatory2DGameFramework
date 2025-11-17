@@ -6,6 +6,6 @@ public class SuperDefenceBuff(BuffComponent buffComponent) : BuffDecorator(buffC
 {
     public override void ApplyBuff(DefenceItem defenceItem, int defencePoints)
     {
-        base.ApplyBuff(defenceItem, defenceItem.ReduceHitPoint * 2);
+        base.ApplyBuff(defenceItem, defencePoints * 2);
     }
 }
