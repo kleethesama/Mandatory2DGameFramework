@@ -1,5 +1,6 @@
 ﻿using Mandatory2DGameFramework.Config;
 using Mandatory2DGameFramework.GameManagement;
+using Mandatory2DGameFramework.Model.Creatures;
 using Mandatory2DGameFramework.Worlds;
 using System.Diagnostics;
 
@@ -19,7 +20,9 @@ public sealed class MyLogger
 
     private void AddDefaultTraceSources()
     {
-        string[] classNames = [nameof(GameManager), nameof(ConfigManager), nameof(GameDifficulty), nameof(WorldManager)];
+        string[] classNames = [nameof(GameManager), nameof(ConfigManager),
+                               nameof(GameDifficulty), nameof(WorldManager),
+                               nameof(Creature)];
         foreach (string className in classNames)
         {
             TraceSource traceSource = new(className, SourceLevels.All)

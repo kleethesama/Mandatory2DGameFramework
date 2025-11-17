@@ -2,5 +2,5 @@
 
 public interface IHitObserver
 {
-    public void Update(IHitSubject subject);
+    public void Update(IHitSubject subject, string message);
 }

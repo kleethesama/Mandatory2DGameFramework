@@ -1,4 +1,5 @@
-﻿using Mandatory2DGameFramework.Model.Inventory;
+﻿using Mandatory2DGameFramework.Logging;
+using Mandatory2DGameFramework.Model.Inventory;
 using Mandatory2DGameFramework.Model.Items;
 using Mandatory2DGameFramework.Model.Items.Attack;
 using Mandatory2DGameFramework.Model.Items.Defence;
@@ -6,7 +7,7 @@ using Mandatory2DGameFramework.Worlds;
 
 namespace Mandatory2DGameFramework.Model.Creatures;
 
-public abstract class Creature(string name, WorldPosition position, World world) : WorldEntityBase(name, position, world), IHitSubject
+public abstract class Creature(string name, WorldPosition position, World world) : WorldEntityBase(name, position, world), IHitSubject, IHitObserver
 {
     private readonly List<IHitObserver> _observers = [];
 
@@ -65,6 +66,7 @@ public abstract class Creature(string name, WorldPosition position, World world)
         int totalDamage = 0;
         foreach (var attackItem in AttackItems)
         {
+            if (CalculateDistance(Position - creature.Position) > attackItem.Range) { continue; }
             creature.ReceiveHit(attackItem.HitDamage);
             totalDamage += attackItem.HitDamage;
         }
@@ -76,7 +78,8 @@ public abstract class Creature(string name, WorldPosition position, World world)
         if (DefenceItems.Count == 0)
         {
             HitPoint -= hit;
-            NotfiyHit();
+            NotfiyHit($"{Name} received attack with sum of {hit}. " +
+                $"({Name} has no defence items)");
             return;
         }
         int totalDefence = 0;
@@ -87,11 +90,11 @@ public abstract class Creature(string name, WorldPosition position, World world)
         int totalDamage = hit - totalDefence;
         if (totalDamage <= 0)
         {
-            NotfiyHit();
+            NotfiyHit($"{Name} received attack of {hit} but negated all damage.");
             return;
         }
         HitPoint -= totalDamage;
-        NotfiyHit();
+        NotfiyHit($"{Name} received attack of {hit} but reduced it to {totalDamage}.");
     }
 
     private bool IsPlaceDistanceSufficient(WorldPosition position)
@@ -162,11 +165,18 @@ public abstract class Creature(string name, WorldPosition position, World world)
         return _observers.Remove(observer);
     }
 
-    public void NotfiyHit()
+    public void NotfiyHit(string message)
     {
         foreach (var observer in _observers)
         {
-            observer.Update(this);
+            observer.Update(this, message);
         }
+    }
+
+    public void Update(IHitSubject subject, string message)
+    {
+        Creature creature = subject as Creature;
+        MyLogger.Instance.GetTraceSource(nameof(Creature)).TraceEvent(
+            System.Diagnostics.TraceEventType.Information, 0, message);
     }
 }

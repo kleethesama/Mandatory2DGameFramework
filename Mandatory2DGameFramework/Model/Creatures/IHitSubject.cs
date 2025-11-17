@@ -4,5 +4,5 @@ public interface IHitSubject
 {
     public void Attach(IHitObserver observer);
     public bool Detach(IHitObserver observer);
-    public void NotfiyHit();
+    public void NotfiyHit(string message);
 }

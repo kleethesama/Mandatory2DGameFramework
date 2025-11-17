@@ -3,6 +3,7 @@ using Mandatory2DGameFramework.Config;
 using Mandatory2DGameFramework.GameManagement;
 using Mandatory2DGameFramework.Logging;
 using Mandatory2DGameFramework.Model.Creatures;
+using Mandatory2DGameFramework.Model.Items.Attack;
 using Mandatory2DGameFramework.Model.Items.Defence;
 using Mandatory2DGameFramework.Model.Items.Defence.Component;
 using Mandatory2DGameFramework.Model.Items.Defence.ComponentImplementation;
@@ -21,7 +22,7 @@ internal class Program
             Name = "ConfigManagerListener",
             Filter = new EventTypeFilter(SourceLevels.All)
         };
-        //MyLogger.Instance.AddListener(nameof(ConfigManager), listener);
+        MyLogger.Instance.AddListener(nameof(Creature), listener);
 
         GameManager.DefaultSetup();
 
@@ -36,17 +37,47 @@ internal class Program
         //    Console.WriteLine(creature);
         //}
 
-        DefenceItem ringDefence = new(5, 0, "Ring");
-        AddDefence additionBuff = new();
-        //ringDefence.ApplyBuff(additionBuff, 10);
+        Creature coolBird = creatures[0];
+        Creature badBird = creatures[1];
+
+        DefenceItem ringDefence = new(5, 0, "Cool Ring"); // Take less damage because it's cool.
+        AddDefence addBuff = new();
+        ringDefence.ApplyBuff(addBuff, 10);
+        Console.WriteLine(ringDefence);
+
+        coolBird.AddDefenceItem(ringDefence);
+
+        AttackItem attackItem = new(20, 1, 1, "Sharp Claws");
+        badBird.AddAttackItem(attackItem);
+
+        // Move bad bird next to cool bird.
+        badBird.MoveRange = int.MaxValue;
+        badBird.Move(coolBird.Position - badBird.Position + new WorldPosition(1, 0));
+        Console.WriteLine($"Cool bird world position: {coolBird.Position}");
+        Console.WriteLine($"Bad bird world position: {badBird.Position}");
+
+        Console.WriteLine($"Cool bird start hitpoints: {coolBird.HitPoint}");
+        //Console.WriteLine($"Bad bird start hitpoints: {badBird.HitPoint}");
+
+        // Bad bird gets notified if cool bird receieves a hit.
+        coolBird.Attach(badBird);
+
+        // Bad bird attacks the cool bird (not a cool move).
+        badBird.Hit(coolBird);
+        Console.WriteLine($"Cool bird now has hitpoints: {coolBird.HitPoint}");
+
+        SuperDefenceBuff DoubleBuffAdded = new(addBuff);
+        ringDefence.ApplyBuff(DoubleBuffAdded, 3);
+        Console.WriteLine(ringDefence);
+
+        badBird.Hit(coolBird);
+        Console.WriteLine($"Cool bird now has hitpoints: {coolBird.HitPoint}");
+        Console.WriteLine($"Cool bird is dead: {coolBird.IsDead()}");
+
+        FragileDefenceDebuff halfDefenceDebuff = new(addBuff);
+        ringDefence.ApplyBuff(halfDefenceDebuff, ringDefence.ReduceHitPoint); // Something happened that made them half as cool.
         //Console.WriteLine(ringDefence);
 
-        SuperDefenceBuff DoubleBuffAdded = new(additionBuff);
-        ringDefence.ApplyBuff(DoubleBuffAdded, 10);
-        Console.WriteLine(ringDefence);
 
-        FragileDefenceDebuff halfDefenceDebuff = new(additionBuff);
-        ringDefence.ApplyBuff(halfDefenceDebuff, ringDefence.ReduceHitPoint);
-        Console.WriteLine(ringDefence);
     }
 }
