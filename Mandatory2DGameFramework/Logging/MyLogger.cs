@@ -1,8 +1,4 @@
-﻿using Mandatory2DGameFramework.Config;
-using Mandatory2DGameFramework.GameManagement;
-using Mandatory2DGameFramework.Model.Creatures;
-using Mandatory2DGameFramework.Worlds;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 
 namespace Mandatory2DGameFramework.Logging;
