@@ -3,6 +3,7 @@ using Mandatory2DGameFramework.GameManagement;
 using Mandatory2DGameFramework.Model.Creatures;
 using Mandatory2DGameFramework.Worlds;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace Mandatory2DGameFramework.Logging;
 
@@ -20,12 +21,9 @@ public sealed class MyLogger
 
     private void AddDefaultTraceSources()
     {
-        string[] classNames = [nameof(GameManager), nameof(ConfigManager),
-                               nameof(GameDifficulty), nameof(WorldManager),
-                               nameof(Creature)];
-        foreach (string className in classNames)
+        foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())
         {
-            TraceSource traceSource = new(className, SourceLevels.All)
+            TraceSource traceSource = new(type.Name, SourceLevels.All)
             {
                 Switch = new SourceSwitch("SourceSwitch", SourceLevels.All.ToString())
             };
