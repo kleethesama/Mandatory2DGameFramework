@@ -31,6 +31,30 @@ public sealed class MyLogger
         }
     }
 
+    public void AddGlobalListener(TraceListener listener)
+    {
+        foreach (TraceSource traceSource in _traceSources)
+        {
+            traceSource.Listeners.Add(listener);
+        }
+    }
+
+    public void RemoveGlobalListener(TraceListener listener)
+    {
+        foreach (TraceSource traceSource in _traceSources)
+        {
+            traceSource.Listeners.Remove(listener);
+        }
+    }
+
+    public void RemoveGlobalListener(string name)
+    {
+        foreach (TraceSource traceSource in _traceSources)
+        {
+            traceSource.Listeners.Remove(GetListener(traceSource, name));
+        }
+    }
+
     public TraceSource GetTraceSource(TraceSource traceSource)
     {
         TraceSource source = _traceSources.FirstOrDefault(e => e == traceSource)
