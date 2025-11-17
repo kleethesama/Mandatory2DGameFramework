@@ -44,5 +44,9 @@ internal class Program
         SuperDefenceBuff DoubleBuffAdded = new(additionBuff);
         ringDefence.ApplyBuff(DoubleBuffAdded, 10);
         Console.WriteLine(ringDefence);
+
+        FragileDefenceDebuff halfDefenceDebuff = new(additionBuff);
+        ringDefence.ApplyBuff(halfDefenceDebuff, ringDefence.ReduceHitPoint);
+        Console.WriteLine(ringDefence);
     }
 }
