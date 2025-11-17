@@ -43,7 +43,7 @@ public sealed class MyLogger
     {
         foreach (TraceSource traceSource in _traceSources)
         {
-            traceSource.Listeners.Remove(listener);
+            RemoveListener(traceSource, listener);
         }
     }
 
@@ -51,7 +51,7 @@ public sealed class MyLogger
     {
         foreach (TraceSource traceSource in _traceSources)
         {
-            traceSource.Listeners.Remove(GetListener(traceSource, name));
+            RemoveListener(traceSource, GetListener(traceSource, name));
         }
     }
 
