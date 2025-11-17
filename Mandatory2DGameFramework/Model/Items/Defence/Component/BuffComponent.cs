@@ -1,6 +1,10 @@
-﻿namespace Mandatory2DGameFramework.Model.Items.Defence.Component;
+﻿using Mandatory2DGameFramework.Model.Items.BuffTree;
 
-public abstract class BuffComponent
+namespace Mandatory2DGameFramework.Model.Items.Defence.Component;
+
+public abstract class BuffComponent : IContainer
 {
+    public virtual bool IsContainer => false;
+
     public abstract void ApplyBuff(DefenceItem defenceItem, int defencePoints);
 }
