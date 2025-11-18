@@ -4,74 +4,68 @@ using Mandatory2DGameFramework.Model.Items.Defence;
 
 namespace ExampleGame.Items;
 
-internal class BirdItemHandler : IItemHandler // Implemented strategy pattern
+internal class BirdItemHandler : ItemHandler // Implemented strategy pattern
 {
-    public int MaxItems { get; } = 1;
+    public override int MaxItems { get; } = 1;
 
-    public void AddAttackItem(AttackItem attackItem, List<AttackItem> attackItems)
+    public override void AddAttackItem(AttackItem attackItem, List<AttackItem> attackItems)
     {
-        //if (!IsAllowedAttackItem(attackItem)) { return; }
-        if (attackItems.Count < MaxItems)
-        {
-            attackItems.Add(attackItem);
-        }
+        base.AddAttackItem(attackItem, attackItems);
+        // Add more logic
     }
 
-    public bool IsAllowedAttackItem(AttackItem attackItem)
+    public override bool IsAllowedAttackItem(AttackItem attackItem)
     {
         throw new NotImplementedException();
     }
 
-    public bool IsAllowedDefenceItem(DefenceItem defenceItem)
+    public override bool IsAllowedDefenceItem(DefenceItem defenceItem)
     {
         throw new NotImplementedException();
     }
 
-    public void AddDefenceItem(DefenceItem defenceItem, List<DefenceItem> defenceItems)
+    public override void AddDefenceItem(DefenceItem defenceItem, List<DefenceItem> defenceItems)
     {
-        //if (!IsAllowedDefenceItem(defenceItem)) { return; }
-        if (defenceItems.Count < MaxItems)
-        {
-            defenceItems.Add(defenceItem);
-        }
+        base.AddDefenceItem(defenceItem, defenceItems);
+        // Add more logic
     }
 
-    public void GetAttackItem(string name, List<AttackItem> attackItems)
+    public override void GetAttackItem(string name, List<AttackItem> attackItems)
     {
         throw new NotImplementedException();
     }
 
-    public void GetAttackItem(int id, List<AttackItem> attackItems)
+    public override void GetAttackItem(int id, List<AttackItem> attackItems)
     {
         throw new NotImplementedException();
     }
 
-    public void GetDefenceItem(string name, List<DefenceItem> defenceItems)
+    public override void GetDefenceItem(string name, List<DefenceItem> defenceItems)
     {
         throw new NotImplementedException();
     }
 
-    public void GetDefenceItem(int id, List<DefenceItem> defenceItems)
+    public override void GetDefenceItem(int id, List<DefenceItem> defenceItems)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveAttackItem(string name, List<AttackItem> attackItems)
+    public override void RemoveAttackItem(string name, List<AttackItem> attackItems)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveAttackItem(int id, List<AttackItem> attackItems)
+    public override void RemoveAttackItem(int id, List<AttackItem> attackItems)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveDefenceItem(string name, List<DefenceItem> defenceItems)
+    public override void RemoveDefenceItem(string name, List<DefenceItem> defenceItems)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveDefenceItem(int id, List<DefenceItem> defenceItems)
+    public override void RemoveDefenceItem(int id, List<DefenceItem> defenceItems)
     {
         throw new NotImplementedException();
     }

@@ -40,6 +40,24 @@ public class World
         //_worldEntities = entityList;
     }
 
+    /// <summary>
+    /// Used to check if a position is valid for this <see cref="Creature"/>'s <see cref="World"/>.
+    /// </summary>
+    /// <param name="position">
+    /// The coordinate position to check for.
+    /// </param>
+    /// <returns>
+    /// <see langword="true"/> if within world boundaries, otherwise <see langword="false"/>.
+    /// </returns>
+    public bool IsWithinWorld(WorldPosition position)
+    {
+        if ((position.X > MaxX && position.X >= 0) || (position.Y > MaxY && position.Y >= 0))
+        {
+            return false;
+        }
+        return true;
+    }
+
     public bool TryIsPositionOccupied(WorldPosition position, out Creature? creature)
     {
         foreach (var worldCreature in _creatures)

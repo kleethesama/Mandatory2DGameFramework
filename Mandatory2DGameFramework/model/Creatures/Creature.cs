@@ -19,44 +19,44 @@ public abstract class Creature(string name, WorldPosition position, World world)
     private readonly List<IHitObserver> _observers = [];
 
     public abstract bool IsPlayer { get; }
-    public abstract int MaxHitPoint { get; protected set; }
+    public virtual int MaxHitPoint { get; protected set; } // Needs range validation for setter
     public abstract int HitPoint { get; protected set; }
-    public abstract int MoveRange { get; set; }
-    public abstract int DetectRange { get; set; }
+    public virtual int MoveRange { get; set; } // Needs range validation for setter
+    public virtual int DetectRange { get; set; } // Needs range validation for setter
     public abstract List<AttackItem> AttackItems { get; set; }
     public abstract List<DefenceItem> DefenceItems { get; set; }
-    public abstract IItemHandler ItemHandler { protected get; set; } // Strategy pattern
+    public abstract ItemHandler ItemHandler { protected get; set; } // Strategy pattern
 
     /// <summary>
     /// Calculates the distance for when a creature needs to move.
     /// </summary>
-    /// <param name="directionVector"></param>
-    /// <returns>The length of the vector.</returns>
-    private static int CalculateDistance(WorldPosition directionVector)
+    /// <param name="vector">
+    /// The given vector for which the length is needed from.
+    /// </param>
+    /// <returns>
+    /// The rounded down length of the vector.
+    /// </returns>
+    private static int CalculateDistance(WorldPosition vector)
     {
-        double distance = Math.Sqrt(Math.Pow(directionVector.X, 2) + Math.Pow(directionVector.Y, 2));
+        double distance = Math.Sqrt(Math.Pow(vector.X, 2) + Math.Pow(vector.Y, 2));
         return (int)Math.Floor(distance);
     }
 
-    public bool IsWithinWorld(WorldPosition position)
-    {
-        if ((position.X > World.MaxX && position.X >= 0) || (position.Y > World.MaxY && position.Y >= 0))
-        {
-            return false;
-        }
-        return true;
-    }
-
     /// <summary>
-    /// Moves this <see cref="Creature"/> 
+    /// Moves this <see cref="Creature"/> to a new position in the <see cref="World"/> 
+    /// based on their movement range.
     /// </summary>
-    /// <param name="directionVector"></param>
-    /// <exception cref="ArgumentException"></exception>
+    /// <param name="directionVector">
+    /// The direction of movement using this <see cref="Creature"/>'s current position.
+    /// </param>
+    /// <exception cref="ArgumentException">
+    /// Movement vector must be less- or equal to the creature's movement range.
+    /// </exception>
     public void Move(WorldPosition directionVector)
     {
-        if (MoveRange <= 0) { return; }
+        if (MoveRange == 0) { return; }
         WorldPosition newPosition = Position + directionVector;
-        if (!IsWithinWorld(newPosition)) { return; }
+        if (!World.IsWithinWorld(newPosition)) { return; } // Could make this into an exception too.
         int moveDistance = CalculateDistance(directionVector);
         if (moveDistance > MoveRange)
         {
@@ -67,9 +67,16 @@ public abstract class Creature(string name, WorldPosition position, World world)
         Position = newPosition;
     }
 
+    /// <summary>
+    /// Moves this <see cref="Creature"/> to a new position in the <see cref="World"/> 
+    /// without regard for their movement range.
+    /// </summary>
+    /// <param name="newPosition">
+    /// The new position to move to in the <see cref="World"/>.
+    /// </param>
     public void MoveTo(WorldPosition newPosition)
     {
-        if (!IsWithinWorld(newPosition)) { return; }
+        if (!World.IsWithinWorld(newPosition)) { return; }
         Position = newPosition;
     }
 
