@@ -22,13 +22,25 @@ internal class Program
             Name = "ConfigManagerListener",
             Filter = new EventTypeFilter(SourceLevels.All)
         };
-        MyLogger.Instance.AddListener(nameof(Creature), listener);
+        //MyLogger.Instance.AddListener(nameof(Creature), listener);
+        MyLogger.Instance.AddGlobalListener(listener);
 
-        GameManager.DefaultSetup();
+        var world = new World();
+        var diff = GameDifficulty.Instance;
 
-        //Console.WriteLine(WorldManager.Instance.CurrentWorld);
+        List<Configurator> configs = [];
+        configs.Add(new WorldSizeConfigurator(world));
+        configs.Add(new DifficultyConfigurator(diff));
 
-        //Console.WriteLine(GameDifficulty.Instance);
+        ConfigManager manager = ConfigManager.Instance;
+        manager.LoadConfigFile();
+        manager.ConfigureAll(configs);
+
+        WorldManager.SetWorld(world);
+
+        Console.WriteLine(WorldManager.Instance.CurrentWorld);
+
+        Console.WriteLine(GameDifficulty.Instance);
 
         var factory = new BirdFactory(WorldManager.Instance.CurrentWorld);
         List<Creature> creatures = factory.CreateRandoms(5);
@@ -57,7 +69,6 @@ internal class Program
         Console.WriteLine($"Bad bird world position: {badBird.Position}");
 
         Console.WriteLine($"Cool bird start hitpoints: {coolBird.HitPoint}");
-        //Console.WriteLine($"Bad bird start hitpoints: {badBird.HitPoint}");
 
         // Bad bird gets notified if cool bird receieves a hit.
         coolBird.Attach(badBird);
@@ -66,7 +77,7 @@ internal class Program
         badBird.Hit(coolBird);
         Console.WriteLine($"Cool bird now has hitpoints: {coolBird.HitPoint}");
 
-        SuperDefenceBuff DoubleBuffAdded = new(addBuff);
+        SuperDefenceBuff DoubleBuffAdded = new(addBuff); // Doubles the defence points and adds them.
         ringDefence.ApplyBuff(DoubleBuffAdded, 3);
         Console.WriteLine(ringDefence);
 
@@ -76,7 +87,10 @@ internal class Program
 
         FragileDefenceDebuff halfDefenceDebuff = new(addBuff);
         ringDefence.ApplyBuff(halfDefenceDebuff, ringDefence.ReduceHitPoint); // Something happened that made them half as cool.
-        //Console.WriteLine(ringDefence);
+        Console.WriteLine(ringDefence);
+
+        badBird.Hit(coolBird);
+        Console.WriteLine($"Cool bird is dead: {coolBird.IsDead()}");
 
 
     }
