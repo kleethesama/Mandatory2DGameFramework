@@ -31,7 +31,7 @@ public sealed class ConfigManager
         }
     }
 
-    public void ConfigureAll(IList<Configurator> configurators)
+    public void ConfigureAll(IEnumerable<Configurator> configurators)
     {
         if (!_isXmlLoaded)
         {
