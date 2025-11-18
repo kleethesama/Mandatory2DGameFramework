@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace Mandatory2DGameFramework.Logging;
 
+/// <summary>
+/// Default logger for tracing and logging events at runtime.
+/// </summary>
 public sealed class MyLogger
 {
     private static readonly Lazy<MyLogger> _instance = new(() => new MyLogger());
@@ -15,6 +18,9 @@ public sealed class MyLogger
         AddDefaultTraceSources();
     }
 
+    /// <summary>
+    /// Adds default traces source for all classes in this library.
+    /// </summary>
     private void AddDefaultTraceSources()
     {
         foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())

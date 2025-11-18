@@ -3,6 +3,9 @@ using System.Xml;
 
 namespace Mandatory2DGameFramework.Config;
 
+/// <summary>
+/// Manager for the XML configuration file.
+/// </summary>
 public sealed class ConfigManager
 {
     private static readonly Lazy<ConfigManager> _instance = new(() => new ConfigManager());
@@ -15,6 +18,9 @@ public sealed class ConfigManager
 
     private ConfigManager() { }
 
+    /// <summary>
+    /// Loads the XML file into memory so it can be used by <see cref="ConfigureAll"/>.
+    /// </summary>
     public void LoadConfigFile()
     {
         try
@@ -31,6 +37,14 @@ public sealed class ConfigManager
         }
     }
 
+    /// <summary>
+    /// Configures all the possible custom settings via the loaded XML file.
+    /// </summary>
+    /// <param name="configurators">
+    /// A collection of <see cref="Configurator"/>s that 
+    /// do the work of changing possible settings.
+    /// </param>
+    /// <exception cref="Exception"></exception>
     public void ConfigureAll(IEnumerable<Configurator> configurators)
     {
         if (!_isXmlLoaded)
