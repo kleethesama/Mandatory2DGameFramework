@@ -1,0 +1,73 @@
+\doxysection{Mandatory2\+DGame\+Framework.\+Config.\+Config\+Manager Class Reference}
+\hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager}{}\label{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager}\index{Mandatory2DGameFramework.Config.ConfigManager@{Mandatory2DGameFramework.Config.ConfigManager}}
+
+
+Manager for the XML configuration file.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a3960363f7de96a698149b64cd9cc53ce}\label{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a3960363f7de96a698149b64cd9cc53ce} 
+void {\bfseries Load\+Config\+File} ()
+\begin{DoxyCompactList}\small\item\em Loads the XML file into memory so it can be used by \doxylink{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_afb08fc2952ec2461514b5f8389f4cd3b}{Configure\+All}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_afb08fc2952ec2461514b5f8389f4cd3b}{Configure\+All}} (IEnumerable$<$ \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_config_1_1_configurator}{Configurator}} $>$ configurators)
+\begin{DoxyCompactList}\small\item\em Configures all the possible custom settings via the loaded XML file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a3ddec4e8f090c3adb9e88848919336c0}\label{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a3ddec4e8f090c3adb9e88848919336c0} 
+static Config\+Manager {\bfseries Instance}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+static string \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a76dee306a11a2559c1163c031b4bc0df}{Config\+File\+Path}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manager for the XML configuration file. 
+
+\label{doc-func-members}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_afb08fc2952ec2461514b5f8389f4cd3b}\index{Mandatory2DGameFramework.Config.ConfigManager@{Mandatory2DGameFramework.Config.ConfigManager}!ConfigureAll@{ConfigureAll}}
+\index{ConfigureAll@{ConfigureAll}!Mandatory2DGameFramework.Config.ConfigManager@{Mandatory2DGameFramework.Config.ConfigManager}}
+\doxysubsubsection{\texorpdfstring{ConfigureAll()}{ConfigureAll()}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_afb08fc2952ec2461514b5f8389f4cd3b} 
+void Mandatory2\+DGame\+Framework.\+Config.\+Config\+Manager.\+Configure\+All (\begin{DoxyParamCaption}\item[{IEnumerable$<$ \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_config_1_1_configurator}{Configurator}} $>$}]{configurators}{}\end{DoxyParamCaption})}
+
+
+
+Configures all the possible custom settings via the loaded XML file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configurators} & A collection of \doxylink{class_mandatory2_d_game_framework_1_1_config_1_1_configurator}{Configurator}s that do the work of changing possible settings. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+\label{doc-property-members}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a76dee306a11a2559c1163c031b4bc0df}\index{Mandatory2DGameFramework.Config.ConfigManager@{Mandatory2DGameFramework.Config.ConfigManager}!ConfigFilePath@{ConfigFilePath}}
+\index{ConfigFilePath@{ConfigFilePath}!Mandatory2DGameFramework.Config.ConfigManager@{Mandatory2DGameFramework.Config.ConfigManager}}
+\doxysubsubsection{\texorpdfstring{ConfigFilePath}{ConfigFilePath}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_config_1_1_config_manager_a76dee306a11a2559c1163c031b4bc0df} 
+string Mandatory2\+DGame\+Framework.\+Config.\+Config\+Manager.\+Config\+File\+Path\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}, {\ttfamily [set]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}C:\(\backslash\)\(\backslash\)Users\(\backslash\)\(\backslash\)fck\(\backslash\)\(\backslash\)source\(\backslash\)\(\backslash\)repos\(\backslash\)\(\backslash\)Mandatory2DGameFramework\(\backslash\)\(\backslash\)Mandatory2DGameFramework\(\backslash\)\(\backslash\)Config\(\backslash\)\(\backslash\)WorldTestFile.xml"{}}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/fck/source/repos/\+Mandatory2\+DGame\+Framework/\+Mandatory2\+DGame\+Framework/\+Config/Config\+Manager.\+cs\end{DoxyCompactItemize}

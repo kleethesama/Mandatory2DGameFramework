@@ -1,0 +1,166 @@
+\doxysection{Mandatory2\+DGame\+Framework.\+Worlds.\+World Class Reference}
+\hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world}{}\label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+
+
+The object that all \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}s and Creatures inhabit.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_adf4e22cf2735b023b5aa0c8268943d18}\label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_adf4e22cf2735b023b5aa0c8268943d18} 
+{\bfseries World} (int maxX, int maxY)
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a1c193786afb2ad9c9b27474845315b66}\label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a1c193786afb2ad9c9b27474845315b66} 
+{\bfseries World} (int maxX, int maxY, List$<$ \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}} $>$ world\+Objects, List$<$ Creature $>$ creatures)
+\item 
+bool \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_ac5751200897c15a04a0ef7a93d53edbf}{Is\+Within\+World}} (\mbox{\hyperlink{struct_mandatory2_d_game_framework_1_1_worlds_1_1_world_position}{World\+Position}} position)
+\begin{DoxyCompactList}\small\item\em Check if a position is valid for this Creature\textquotesingle{}s \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world}{World}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a6d288a2e910a39e1f61e7533ac68ec05}{Try\+Is\+Position\+Occupied}} (\mbox{\hyperlink{struct_mandatory2_d_game_framework_1_1_worlds_1_1_world_position}{World\+Position}} position, out Creature? creature)
+\begin{DoxyCompactList}\small\item\em Check if a world position is occupied by a Creature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_afdbd980184cbc3762c50999f0e3363cb}{Try\+Is\+Position\+Occupied}} (\mbox{\hyperlink{struct_mandatory2_d_game_framework_1_1_worlds_1_1_world_position}{World\+Position}} position, out \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}}? world\+Object)
+\begin{DoxyCompactList}\small\item\em Check if a world position is occupied by a \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a68b458038e923eec26f5351fdd7c442b}{Add\+Creature}} (Creature creature)
+\begin{DoxyCompactList}\small\item\em Adds a Creature to this world. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a078407d87ad9de640174d4d543e388bf}{Remove\+Creature}} (Creature creature)
+\begin{DoxyCompactList}\small\item\em Removes a Creature from this world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a2eea2a7255ff7b630526f17c90e698cc}{Populate\+World}} (IEnumerable$<$ Creature $>$ creatures)
+\begin{DoxyCompactList}\small\item\em Option for adding several Creatures to this world at once. \end{DoxyCompactList}\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a16e027fec59c162b99889551105edc42}\label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a16e027fec59c162b99889551105edc42} 
+override string {\bfseries To\+String} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_aa87e01d28fe0a2e8953c3a8a629bc3eb}\label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_aa87e01d28fe0a2e8953c3a8a629bc3eb} 
+int {\bfseries MaxX}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a2fa9d33a8036ac0e3b55468b6e42a0be}\label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a2fa9d33a8036ac0e3b55468b6e42a0be} 
+int {\bfseries MaxY}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The object that all \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}s and Creatures inhabit. 
+
+\label{doc-func-members}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a68b458038e923eec26f5351fdd7c442b}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}!AddCreature@{AddCreature}}
+\index{AddCreature@{AddCreature}!Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+\doxysubsubsection{\texorpdfstring{AddCreature()}{AddCreature()}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a68b458038e923eec26f5351fdd7c442b} 
+void Mandatory2\+DGame\+Framework.\+Worlds.\+World.\+Add\+Creature (\begin{DoxyParamCaption}\item[{Creature}]{creature}{}\end{DoxyParamCaption})}
+
+
+
+Adds a Creature to this world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em creature} & The Creature to be added. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_ac5751200897c15a04a0ef7a93d53edbf}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}!IsWithinWorld@{IsWithinWorld}}
+\index{IsWithinWorld@{IsWithinWorld}!Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+\doxysubsubsection{\texorpdfstring{IsWithinWorld()}{IsWithinWorld()}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_ac5751200897c15a04a0ef7a93d53edbf} 
+bool Mandatory2\+DGame\+Framework.\+Worlds.\+World.\+Is\+Within\+World (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_mandatory2_d_game_framework_1_1_worlds_1_1_world_position}{World\+Position}}}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Check if a position is valid for this Creature\textquotesingle{}s \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world}{World}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The coordinate position to check for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if within world boundaries, otherwise {\ttfamily false}. 
+\end{DoxyReturn}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a2eea2a7255ff7b630526f17c90e698cc}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}!PopulateWorld@{PopulateWorld}}
+\index{PopulateWorld@{PopulateWorld}!Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+\doxysubsubsection{\texorpdfstring{PopulateWorld()}{PopulateWorld()}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a2eea2a7255ff7b630526f17c90e698cc} 
+void Mandatory2\+DGame\+Framework.\+Worlds.\+World.\+Populate\+World (\begin{DoxyParamCaption}\item[{IEnumerable$<$ Creature $>$}]{creatures}{}\end{DoxyParamCaption})}
+
+
+
+Option for adding several Creatures to this world at once. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em creatures} & The Creatures to be added. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a078407d87ad9de640174d4d543e388bf}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}!RemoveCreature@{RemoveCreature}}
+\index{RemoveCreature@{RemoveCreature}!Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+\doxysubsubsection{\texorpdfstring{RemoveCreature()}{RemoveCreature()}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a078407d87ad9de640174d4d543e388bf} 
+bool Mandatory2\+DGame\+Framework.\+Worlds.\+World.\+Remove\+Creature (\begin{DoxyParamCaption}\item[{Creature}]{creature}{}\end{DoxyParamCaption})}
+
+
+
+Removes a Creature from this world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em creature} & The Creature to be removed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a6d288a2e910a39e1f61e7533ac68ec05}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}!TryIsPositionOccupied@{TryIsPositionOccupied}}
+\index{TryIsPositionOccupied@{TryIsPositionOccupied}!Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+\doxysubsubsection{\texorpdfstring{TryIsPositionOccupied()}{TryIsPositionOccupied()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_a6d288a2e910a39e1f61e7533ac68ec05} 
+bool Mandatory2\+DGame\+Framework.\+Worlds.\+World.\+Try\+Is\+Position\+Occupied (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_mandatory2_d_game_framework_1_1_worlds_1_1_world_position}{World\+Position}}}]{position}{, }\item[{out Creature?}]{creature}{}\end{DoxyParamCaption})}
+
+
+
+Check if a world position is occupied by a Creature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The world position to check. \\
+\hline
+{\em creature} & The Creature in that world position. Will be {\ttfamily null} if method returns {\ttfamily false}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if a Creature is found, otherwise {\ttfamily false}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Exception} & Invalid world position to check.\\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_afdbd980184cbc3762c50999f0e3363cb}\index{Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}!TryIsPositionOccupied@{TryIsPositionOccupied}}
+\index{TryIsPositionOccupied@{TryIsPositionOccupied}!Mandatory2DGameFramework.Worlds.World@{Mandatory2DGameFramework.Worlds.World}}
+\doxysubsubsection{\texorpdfstring{TryIsPositionOccupied()}{TryIsPositionOccupied()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_afdbd980184cbc3762c50999f0e3363cb} 
+bool Mandatory2\+DGame\+Framework.\+Worlds.\+World.\+Try\+Is\+Position\+Occupied (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_mandatory2_d_game_framework_1_1_worlds_1_1_world_position}{World\+Position}}}]{position}{, }\item[{out \mbox{\hyperlink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}}?}]{world\+Object}{}\end{DoxyParamCaption})}
+
+
+
+Check if a world position is occupied by a \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The world position to check. \\
+\hline
+{\em world\+Object} & The \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object} in that world position. Will be {\ttfamily null} if method returns {\ttfamily false}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if a \doxylink{class_mandatory2_d_game_framework_1_1_worlds_1_1_world_object}{World\+Object} is found, otherwise {\ttfamily false}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Exception} & Invalid world position to check.\\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/fck/source/repos/\+Mandatory2\+DGame\+Framework/\+Mandatory2\+DGame\+Framework/\+Worlds/World.\+cs\end{DoxyCompactItemize}
