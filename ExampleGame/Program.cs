@@ -16,8 +16,10 @@ TraceListener listener = new ConsoleTraceListener
     Name = "ConfigManagerListener",
     Filter = new EventTypeFilter(SourceLevels.All)
 };
-//MyLogger.Instance.AddListener(nameof(Creature), listener);
-MyLogger.Instance.AddGlobalListener(listener);
+MyLogger.Instance.AddListener(nameof(Creature), listener);
+var tsToRemove = MyLogger.Instance.GetTraceSource(nameof(Creature));
+//MyLogger.Instance.RemoveListener(tsToRemove, listener);
+//MyLogger.Instance.AddGlobalListener(listener);
 
 var world = new World();
 var diff = GameDifficulty.Instance;
