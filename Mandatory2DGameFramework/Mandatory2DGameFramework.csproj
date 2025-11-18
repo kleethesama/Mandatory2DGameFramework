@@ -4,6 +4,12 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Klee$(AssemblyName)</PackageId>
+    <Title>Klee's Mandatory 2D Game Framework</Title>
+    <Company>Frederik Christian Klee</Company>
+    <Description>An assignemnt for Advanced Software Construction elective course.</Description>
+    <RepositoryUrl>https://github.com/kleethesama/Mandatory2DGameFramework</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
