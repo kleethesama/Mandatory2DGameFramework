@@ -51,7 +51,7 @@ public class World
     /// </returns>
     public bool IsWithinWorld(WorldPosition position)
     {
-        if ((position.X > MaxX && position.X >= 0) || (position.Y > MaxY && position.Y >= 0))
+        if ((position.X > MaxX || position.X < 0) || (position.Y > MaxY || position.Y < 0))
         {
             return false;
         }
