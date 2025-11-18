@@ -17,9 +17,9 @@ public static class GameManager
         var world = new World();
         var diff = GameDifficulty.Instance;
 
-        var configs = new Configurator[2];
-        configs[0] = new WorldSizeConfigurator(world);
-        configs[1] = new DifficultyConfigurator(diff);
+        List<Configurator> configs = [];
+        configs.Add(new WorldSizeConfigurator(world));
+        configs.Add(new DifficultyConfigurator(diff));
 
         ConfigManager manager = ConfigManager.Instance;
         manager.LoadConfigFile();

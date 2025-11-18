@@ -43,7 +43,7 @@ public sealed class ConfigManager
                 System.Diagnostics.TraceEventType.Information, 2,
                 $"Configurating using configurator: {config.GetType()}");
 
-            if (!config.TryConfigure(_xmlDocument))
+            if (!config.ReadAndConfigure(_xmlDocument))
             {
                 MyLogger.Instance.GetTraceSource(nameof(ConfigManager)).TraceEvent(
                     System.Diagnostics.TraceEventType.Error, 2,

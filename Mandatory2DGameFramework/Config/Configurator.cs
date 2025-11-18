@@ -6,14 +6,15 @@ public abstract class Configurator
 {
     protected XmlNode? _parentNode;
 
-    protected virtual void StartReadConfigFile(XmlDocument xmlDoc)
+    public virtual bool ReadAndConfigure(XmlDocument xmlDoc)
     {
         _parentNode = xmlDoc.SelectSingleNode("GameConfig");
         if (_parentNode == null)
         {
             throw new Exception("Couldn't find GameConfig node.");
         }
+        return TryConfigure(xmlDoc);
     }
 
-    public abstract bool TryConfigure(XmlDocument xmlDoc);
+    protected abstract bool TryConfigure(XmlDocument xmlDoc);
 }

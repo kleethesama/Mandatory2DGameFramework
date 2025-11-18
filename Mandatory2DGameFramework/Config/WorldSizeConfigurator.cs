@@ -5,9 +5,8 @@ namespace Mandatory2DGameFramework.Config;
 
 public class WorldSizeConfigurator(World configuredObject) : Configurator
 {
-    public override bool TryConfigure(XmlDocument xmlDoc)
+    protected override bool TryConfigure(XmlDocument xmlDoc)
     {
-        base.StartReadConfigFile(xmlDoc);
         XmlNode? worldSizeNode = _parentNode?.SelectSingleNode("WorldSize");
         var nodeX = worldSizeNode?.SelectSingleNode("X");
         var nodeY = worldSizeNode?.SelectSingleNode("Y");
