@@ -4,6 +4,7 @@ using Mandatory2DGameFramework.GameManagement;
 using Mandatory2DGameFramework.Logging;
 using Mandatory2DGameFramework.Model.Creatures;
 using Mandatory2DGameFramework.Model.Items.Attack;
+using Mandatory2DGameFramework.Model.Items.BuffTree;
 using Mandatory2DGameFramework.Model.Items.Defence;
 using Mandatory2DGameFramework.Model.Items.Defence.Component;
 using Mandatory2DGameFramework.Model.Items.Defence.ComponentImplementation;
@@ -32,9 +33,8 @@ internal class Program
         configs.Add(new WorldSizeConfigurator(world));
         configs.Add(new DifficultyConfigurator(diff));
 
-        ConfigManager manager = ConfigManager.Instance;
-        manager.LoadConfigFile();
-        manager.ConfigureAll(configs);
+        ConfigManager.Instance.LoadConfigFile();
+        ConfigManager.Instance.ConfigureAll(configs);
 
         WorldManager.SetWorld(world);
 
@@ -92,6 +92,12 @@ internal class Program
         badBird.Hit(coolBird);
         Console.WriteLine($"Cool bird is dead: {coolBird.IsDead()}");
 
-
+        BuffContainer container = new();
+        container.Add(addBuff);
+        BuffContainer nestedContainer = new();
+        nestedContainer.Add(DoubleBuffAdded);
+        container.Add(nestedContainer);
+        container.ApplyBuff(ringDefence, 50);
+        Console.WriteLine(ringDefence);
     }
 }
