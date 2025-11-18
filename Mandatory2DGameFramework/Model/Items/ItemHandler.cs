@@ -27,22 +27,21 @@ public abstract class ItemHandler
     }
     public virtual void AddAttackItem(AttackItem attackItem, List<AttackItem> attackItems)
     {
-        if (!IsAllowedAttackItem(attackItem))
-        {
-            throw new Exception("Attack item not allowed.");
-        }
+        //if (!IsAllowedAttackItem(attackItem))
+        //{
+        //    throw new Exception("Attack item not allowed.");
+        //}
         if (attackItems.Count < MaxItems)
         {
             attackItems.Add(attackItem);
         }
-        throw new NotImplementedException();
     }
     public virtual void AddDefenceItem(DefenceItem defenceItem, List<DefenceItem> defenceItems)
     {
-        if (!IsAllowedDefenceItem(defenceItem))
-        {
-            throw new Exception("Defence item not allowed.");
-        }
+        //if (!IsAllowedDefenceItem(defenceItem))
+        //{
+        //    throw new Exception("Defence item not allowed.");
+        //}
         if (defenceItems.Count < MaxItems)
         {
             defenceItems.Add(defenceItem);

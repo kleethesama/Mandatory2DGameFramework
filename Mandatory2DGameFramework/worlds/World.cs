@@ -58,8 +58,19 @@ public class World
         return true;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="creature"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentException"></exception>
     public bool TryIsPositionOccupied(WorldPosition position, out Creature? creature)
     {
+        if (!IsWithinWorld(position))
+        {
+            throw new ArgumentException("Invalid world position to check.", nameof(position));
+        }
         foreach (var worldCreature in _creatures)
         {
             if (worldCreature.Position == position)
@@ -74,6 +85,10 @@ public class World
 
     public bool TryIsPositionOccupied(WorldPosition position, out WorldObject? worldObject)
     {
+        if (!IsWithinWorld(position))
+        {
+            throw new ArgumentException("Invalid world position to check.", nameof(position));
+        }
         foreach (var @object in _worldObjects)
         {
             if (@object.Position == position)

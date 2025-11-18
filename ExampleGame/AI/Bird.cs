@@ -25,9 +25,8 @@ internal class Bird : AiCreature
         BehaviorState = new IdleBirdBehavior(this);
     }
 
-    public Bird(string name, WorldPosition position, World world, int maxHitPoint, int hitPoint, int moveRange, int detectRange, List<AttackItem> attackItems, List<DefenceItem> defenceItems, IItemHandler itemHandler) : this(name, position, world)
+    public Bird(string name, WorldPosition position, World world, int maxHitPoint, int hitPoint, int moveRange, int detectRange, List<AttackItem> attackItems, List<DefenceItem> defenceItems, ItemHandler itemHandler) : this(name, position, world)
     {
-        BehaviorState = new IdleBirdBehavior(this);
         MaxHitPoint = maxHitPoint;
         HitPoint = hitPoint;
         MoveRange = moveRange;
